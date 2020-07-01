@@ -6,10 +6,24 @@
 }
 .subtitulo {
     font-weight: bold;
-    color: #343434
+    color: #343434;
+    text-shadow: 2px 2px 4px #000000;
 }
-.sombra{
+.sombra {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.relleno {
+    background: url("../../images/back.jpg") repeat-x;
+}
+.link-format {
+    text-decoration: none;
+    text-shadow: blue;
+}
+.button {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    font-size: 1.4em;
 }
 @media only screen and (min-width: 768px){
     div.container {

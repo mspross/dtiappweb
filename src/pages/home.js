@@ -54,23 +54,24 @@ export default class cover extends Component {
             this.setState({
                 isCommit: true,
                 isError: false,
+                user: '',
+                email: '',
+                comments: '',    
                 msgStatus: res.data.status,
-                msgText: res.data.message
+                msgText: 'Gracias por su comentario.'
             });
         }catch(error){
             if(error.response.data !== null){
                 this.setState({
                     isCommit: false,
                     isError: true,
-                    msgStatus: error.response.data.status,
-                    msgText: error.response.data.message
+                    msgText: 'Uuupss!! Algo salio mal. Intente nuevamente, por favor.'
                 })    
             }else{
                 this.setState({
                     isCommit: false,
                     isError: true,
-                    msgStatus: error.response.status,
-                    msgText: error.response.statusText
+                    msgText: 'Uuupss!! Algo salio mal. Intente nuevamente, por favor.'
                 })    
             }
         }
@@ -83,10 +84,16 @@ export default class cover extends Component {
             [name]: value
         })
     }
+    handleCloseAlert = e => {
+        e.preventDefault();
+        this.setState({
+            isCommit: false
+        });
+    }
     //Render
     render() {
         //JSX Code
-        const { isModal, isError, isCommit, msgStatus, msgText } = this.state;
+        const { isModal, isError, isCommit, msgText } = this.state;
         if(isModal){
             return(
                 <div>
@@ -251,10 +258,10 @@ export default class cover extends Component {
                                             <Button variant="outline-success" type="Submit" className="button" size="sm">Enviar</Button>
                                         </Form>
                                         {
-                                            isError && <div style={{position: 'relative', bottom: '-25px', boxShadow: '0 4px 5px 0 rgba(0, 0, 0, 0.2), 0 6px 8px 0 rgba(0, 0, 0, 0.19)', fontSize:'1.2em'}} className={'alert alert-danger'}>({msgStatus})<hr/>{msgText}</div>
+                                            isError && <div onClick={this.handleCloseAlert} style={{position: 'relative', bottom: '-25px', boxShadow: '0 4px 5px 0 rgba(0, 0, 0, 0.2), 0 6px 8px 0 rgba(0, 0, 0, 0.19)', fontSize:'1.2em'}} className={'alert alert-danger'}>{msgText}</div>
                                         }
                                         {
-                                            isCommit && <div style={{position: 'relative', bottom: '-25px', boxShadow: '0 4px 5px 0 rgba(0, 0, 0, 0.2), 0 6px 8px 0 rgba(0, 0, 0, 0.19)', fontSize:'1.2em'}} className={'alert alert-success'}>({msgStatus})<hr/>{msgText}</div>
+                                            isCommit && <div onClick={this.handleCloseAlert} style={{position: 'relative', bottom: '-25px', boxShadow: '0 4px 5px 0 rgba(0, 0, 0, 0.2), 0 6px 8px 0 rgba(0, 0, 0, 0.19)', fontSize:'1.2em'}} className={'alert alert-success'}>{msgText}</div>
                                         }
                                     </Card.Body>
                                 </Card>

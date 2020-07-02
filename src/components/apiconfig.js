@@ -4,7 +4,7 @@ const instance = axios.create({
     /* DEV */
     //baseURL: 'http://localhost:5000'
     /* QA */
-    baseURL: 'http://3.218.228.45:4500'
+    baseURL: 'http://3.218.228.45:4500/api/v1/dtis/stage'
     /* PROD */
     //baseURL: 'http://3.219.61.17:5000'
 });

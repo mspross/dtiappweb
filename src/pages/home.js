@@ -1,7 +1,8 @@
 //Headers Components
 import React, { Component } from 'react';
-import { Container, Row, Col, Card, Button, CardDeck, Modal, Form  } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, CardDeck, Modal, Form } from 'react-bootstrap';
 import APIConf from '../components/apiconfig';
+import Footer from '../components/footer';
 // CSS style sheet
 import './css/style.css';
 // Images
@@ -21,10 +22,13 @@ export default class cover extends Component {
             isModal: false,
             isLoading: false,
             isError: false,
+            isCommit: false,
             link: '/dti',
             user: undefined,
             email: undefined,
-            comments: undefined
+            comments: undefined,
+            msgStatus: null,
+            msgText: null
         }
     }
     //API Calls
@@ -36,10 +40,40 @@ export default class cover extends Component {
             isModal: true
         });
     }
-    handleSubmit = e => {
+    handleSubmit = async e => {
         e.preventDefault();
-        alert('Form submitted sucessfully!');
-        window.location = this.state.link;
+        this.setState({
+            isLoading: true
+        });
+        try{
+            let res = await APIConf.post('/comentarios/add', {
+                nombre: this.state.user,
+                correo: this.state.email,
+                comentario: this.state.comments
+            });
+            this.setState({
+                isCommit: true,
+                isError: false,
+                msgStatus: res.data.status,
+                msgText: res.data.message
+            });
+        }catch(error){
+            if(error.response.data !== null){
+                this.setState({
+                    isCommit: false,
+                    isError: true,
+                    msgStatus: error.response.data.status,
+                    msgText: error.response.data.message
+                })    
+            }else{
+                this.setState({
+                    isCommit: false,
+                    isError: true,
+                    msgStatus: error.response.status,
+                    msgText: error.response.statusText
+                })    
+            }
+        }
     }
     handleChange = e => {
         const target = e.target;
@@ -52,7 +86,7 @@ export default class cover extends Component {
     //Render
     render() {
         //JSX Code
-        const { isModal } = this.state;
+        const { isModal, isError, isCommit, msgStatus, msgText } = this.state;
         if(isModal){
             return(
                 <div>
@@ -96,7 +130,7 @@ export default class cover extends Component {
                                     <Card border="info" bg='light' className="sombra">
                                         <Card.Img variant="top" src={`${RutasCover}`} style={{height:'110px', width:'190px'}} />
                                         <Card.Body>
-                                            <Card.Title style={{fontWeight:'bolder', fontSize:'1.7em'}}>Rutas</Card.Title>
+                                            <Card.Title style={{fontWeight:'bolder', fontSize:'1.7em'}}>Rutas Tur&iacute;sticas</Card.Title>
                                             <Card.Text></Card.Text>
                                             <Button variant="primary">Conocer m&aacute;s...</Button>
                                         </Card.Body>
@@ -104,7 +138,7 @@ export default class cover extends Component {
                                     <Card border="danger" bg='light' className="sombra">
                                         <Card.Img variant="top" src={`${HotelesCover}`} style={{height:'110px', width:'190px'}} />
                                         <Card.Body>
-                                            <Card.Title style={{fontWeight:'bolder', fontSize:'1.7em'}}>Hoteles</Card.Title>
+                                            <Card.Title style={{fontWeight:'bolder', fontSize:'1.7em'}}>Hospedaje</Card.Title>
                                             <Card.Text></Card.Text>
                                             <Button variant="primary">Conocer m&aacute;s...</Button>
                                         </Card.Body>
@@ -216,13 +250,22 @@ export default class cover extends Component {
                                             </Form.Group>
                                             <Button variant="outline-success" type="Submit" className="button" size="sm">Enviar</Button>
                                         </Form>
+                                        {
+                                            isError && <div style={{position: 'relative', bottom: '-25px', boxShadow: '0 4px 5px 0 rgba(0, 0, 0, 0.2), 0 6px 8px 0 rgba(0, 0, 0, 0.19)', fontSize:'1.2em'}} className={'alert alert-danger'}>({msgStatus})<hr/>{msgText}</div>
+                                        }
+                                        {
+                                            isCommit && <div style={{position: 'relative', bottom: '-25px', boxShadow: '0 4px 5px 0 rgba(0, 0, 0, 0.2), 0 6px 8px 0 rgba(0, 0, 0, 0.19)', fontSize:'1.2em'}} className={'alert alert-success'}>({msgStatus})<hr/>{msgText}</div>
+                                        }
                                     </Card.Body>
                                 </Card>
                             </Col>
                         </Row>
                     </Container>
                 </section>
-                <br /><hr /><br />
+                <br /><hr />
+                <section id="sec5">
+                    <Footer />
+                </section>
                 </div>
             )
         }

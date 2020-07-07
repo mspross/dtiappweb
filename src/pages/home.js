@@ -1,18 +1,18 @@
 //Headers Components
 import React, { Component } from 'react';
-import { Container, Row, Col, Card, Button, CardDeck, Modal, Form } from 'react-bootstrap';
+import { Container, Row, Col, Card, CardGroup, Modal } from 'react-bootstrap';
 import APIConf from '../components/apiconfig';
 import Footer from '../components/footer';
 // CSS style sheet
 import './css/style.css';
 // Images
-import Cover from '../images/FL_09.png';
-import RutasCover from '../images/rutasA.png';
-import HotelesCover from '../images/hotel1.png';
-import GastronomiaCover from '../images/gastronomia.png';
-import FeriasCover from '../images/ferias-eventos.png';
-import CulturaCover from '../images/cultura.png';
-import ArtesaniasCover from '../images/artesanias.png';
+import Cover from '../images/D.t.i._Hidalgo2.png';
+import Dti from '../images/Dti_icontext.png';
+import Rutas from '../images/rutasA.png';
+import Registro from '../images/Bot_ini_azul.png';
+import Noticias from '../images/Bot_ini_amarillo.png';
+import Exploracion from '../images/Bot_ini_azulClaro.png';
+import Contacto from '../images/Bot_ini_verde.png';
 //Object
 export default class cover extends Component {
     //Constructor
@@ -24,6 +24,8 @@ export default class cover extends Component {
             isError: false,
             isCommit: false,
             link: '/dti',
+            linkcontacto: '',
+            routelink: '/dti/rutas',
             user: undefined,
             email: undefined,
             comments: undefined,
@@ -39,6 +41,14 @@ export default class cover extends Component {
         this.setState({
             isModal: true
         });
+    }
+    handleContacto = e => {
+        e.preventDefault();
+        window.location = "/dti/contacto";
+    }
+    handleRoutes = e => {
+        e.preventDefault();
+        alert('Próximamente');
     }
     handleSubmit = async e => {
         e.preventDefault();
@@ -90,10 +100,14 @@ export default class cover extends Component {
             isCommit: false
         });
     }
+    handleExploracion = e => {
+        e.preventDefault();
+        alert('Próximamente');
+    }
     //Render
     render() {
         //JSX Code
-        const { isModal, isError, isCommit, msgText } = this.state;
+        const { isModal } = this.state;
         if(isModal){
             return(
                 <div>
@@ -118,83 +132,44 @@ export default class cover extends Component {
                                 <img alt="cover" className="imgcover" src={`${Cover}`}/>
                             </Col>
                         </Row>
-                        <Row>
-                            <Col md={{ span: 6, offset: 3 }}>
-                                <Card body className="sombra">
-                                    <h1 className="subtitulo">Destinos Tur&iacute;sticos Inteligentes</h1>
-                                    <span style={{fontSize:'1.4em'}}>Gravida dictum fusce ut placerat orci nulla pellentesque. Risus at ultrices mi tempus imperdiet nulla malesuada.</span>
-                                </Card>
-                            </Col>
-                        </Row>
                     </Container>
                 </section>
-                <br /><hr /><br />
-                <section id="sec2">
+                 <section id="sec2">
                     <Container fluid>
                         <Row>
                             <Col md={{ span: 6, offset: 3 }}>
-                                <CardDeck>
-                                    <Card border="info" bg='light' className="sombra">
-                                        <Card.Img variant="top" src={`${RutasCover}`} style={{height:'110px', width:'190px'}} />
-                                        <Card.Body>
-                                            <Card.Title style={{fontWeight:'bolder', fontSize:'1.7em'}}>Rutas Tur&iacute;sticas</Card.Title>
-                                            <Card.Text></Card.Text>
-                                            <Button variant="primary">Conocer m&aacute;s...</Button>
-                                        </Card.Body>
+                                <CardGroup>
+                                    <Card>
+                                        <Card.Img variant="top" src={`${Dti}`} style={{height:'260px', width:'225px', cursor:'pointer'}} onClick={this.handleRoutes} />
                                     </Card>
-                                    <Card border="danger" bg='light' className="sombra">
-                                        <Card.Img variant="top" src={`${HotelesCover}`} style={{height:'110px', width:'190px'}} />
-                                        <Card.Body>
-                                            <Card.Title style={{fontWeight:'bolder', fontSize:'1.7em'}}>Hospedaje</Card.Title>
-                                            <Card.Text></Card.Text>
-                                            <Button variant="primary">Conocer m&aacute;s...</Button>
-                                        </Card.Body>
+                                    <Card>
+                                        <Card.Img variant="top" src={`${Rutas}`} style={{height:'250px', width:'225px', cursor:'pointer'}} onClick={this.handleRoutes} />
                                     </Card>
-                                    <Card border="success" bg='light' className="sombra">
-                                        <Card.Img variant="top" src={`${GastronomiaCover}`} style={{height:'110px', width:'190px'}} />
-                                        <Card.Body>
-                                            <Card.Title style={{fontWeight:'bolder', fontSize:'1.7em'}}>Gastronom&iacute;a</Card.Title>
-                                            <Card.Text></Card.Text>
-                                            <Button variant="primary">Conocer m&aacute;s...</Button>
-                                        </Card.Body>
+                                    <Card>
+                                        <Card.Img variant="top" src={`${Registro}`} style={{height:'250px', width:'225px', cursor:'pointer'}} onClick={this.handleRoutes} />
                                     </Card>
-                                </CardDeck>
+                                </CardGroup>
                             </Col>
                         </Row>
-                        <br />
                         <Row>
                             <Col md={{ span: 6, offset: 3 }}>
-                                <CardDeck>
-                                    <Card border="secondary" bg='light' className="sombra">
-                                        <Card.Img variant="top" src={`${FeriasCover}`} style={{height:'110px', width:'190px'}} />
-                                        <Card.Body>
-                                            <Card.Title style={{fontWeight:'bolder', fontSize:'1.7em'}}>Ferias</Card.Title>
-                                            <Card.Text></Card.Text>
-                                            <Button variant="primary">Conocer m&aacute;s...</Button>
-                                        </Card.Body>
+                                <CardGroup>
+                                    <Card>
+                                        <Card.Img variant="top" src={`${Noticias}`} style={{height:'260px', width:'225px', cursor:'pointer'}} onClick={this.handleRoutes} />
                                     </Card>
-                                    <Card border="dark" bg='light' className="sombra">
-                                        <Card.Img variant="top" src={`${CulturaCover}`} style={{height:'110px', width:'190px'}} />
-                                        <Card.Body>
-                                            <Card.Title style={{fontWeight:'bolder', fontSize:'1.7em'}}>Cultura</Card.Title>
-                                            <Card.Text></Card.Text>
-                                            <Button variant="primary">Conocer m&aacute;s...</Button>
-                                        </Card.Body>
+                                    <Card>
+                                        <Card.Img variant="top" src={`${Exploracion}`} style={{height:'260px', width:'225px', cursor:'pointer'}} onClick={this.handleExploracion} />
                                     </Card>
-                                    <Card border="warning" bg='light' className="sombra">
-                                        <Card.Img variant="top" src={`${ArtesaniasCover}`} style={{height:'110px', width:'190px'}} />
-                                        <Card.Body>
-                                            <Card.Title style={{fontWeight:'bolder', fontSize:'1.7em'}}>Artesan&iacute;as</Card.Title>
-                                            <Card.Text></Card.Text>
-                                            <Button variant="primary">Conocer m&aacute;s...</Button>
-                                        </Card.Body>
+                                    <Card>
+                                        <Card.Img variant="top" src={`${Contacto}`} style={{height:'260px', width:'225px', cursor:'pointer'}} onClick={this.handleContacto} />
                                     </Card>
-                                </CardDeck>
+                                </CardGroup>
                             </Col>
                         </Row>
                     </Container>
                 </section>
-                <br /><hr /><br />
+                <br /><hr />
+                {/*
                 <section id="sec3">
                     <Container fluid>
                         <Row>
@@ -206,70 +181,7 @@ export default class cover extends Component {
                             </Col>
                         </Row>
                     </Container>
-                </section>
-                <br /><hr /><br />
-                <section id="sec4">
-                    <Container fluid>
-                        <Row>
-                            <Col md={{ span: 6, offset: 3 }}>
-                                <h2 className="subtitulo">Nos gustar&iacute;a conocer su opini&oacute;n</h2>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col md={{ span: 6, offset: 3 }}>
-                                <Card className="sombra">
-                                    <Card.Body>
-                                        <Form onSubmit={this.handleSubmit}>
-                                            <Form.Group controlId="formBasicName">
-                                                <Form.Control 
-                                                type="text"
-                                                style={{fontSize: '1.3em'}}
-                                                placeholder="Ingrese su nombre" 
-                                                maxLength="100" 
-                                                name="user" 
-                                                onChange={this.handleChange} 
-                                                value={this.state.user} 
-                                                autoComplete="off" 
-                                                required/>
-                                            </Form.Group>
-                                            <Form.Group controlId="formBasicEmail">
-                                                <Form.Control 
-                                                type="text"
-                                                style={{fontSize: '1.3em'}}
-                                                placeholder="Ingrese su correo electr&oacute;nico" 
-                                                name="email" 
-                                                onChange={this.handleChange} 
-                                                value={this.state.email} 
-                                                autoComplete="off" 
-                                                required/>
-                                            </Form.Group>
-                                            <Form.Group controlId="formBasicComments">
-                                                <Form.Control 
-                                                as="textarea"
-                                                style={{fontSize: '1.3em'}}
-                                                placeholder="Ingrese sus comentarios" 
-                                                row="4"
-                                                name="comments"
-                                                onChange={this.handleChange} 
-                                                value={this.state.comments} 
-                                                autoComplete="off" 
-                                                required/>
-                                            </Form.Group>
-                                            <Button variant="outline-success" type="Submit" className="button" size="sm">Enviar</Button>
-                                        </Form>
-                                        {
-                                            isError && <div onClick={this.handleCloseAlert} style={{position: 'relative', bottom: '-25px', boxShadow: '0 4px 5px 0 rgba(0, 0, 0, 0.2), 0 6px 8px 0 rgba(0, 0, 0, 0.19)', fontSize:'1.2em'}} className={'alert alert-danger'}>{msgText}</div>
-                                        }
-                                        {
-                                            isCommit && <div onClick={this.handleCloseAlert} style={{position: 'relative', bottom: '-25px', boxShadow: '0 4px 5px 0 rgba(0, 0, 0, 0.2), 0 6px 8px 0 rgba(0, 0, 0, 0.19)', fontSize:'1.2em'}} className={'alert alert-success'}>{msgText}</div>
-                                        }
-                                    </Card.Body>
-                                </Card>
-                            </Col>
-                        </Row>
-                    </Container>
-                </section>
-                <br /><hr />
+                </section>*/}
                 <section id="sec5">
                     <Footer />
                 </section>

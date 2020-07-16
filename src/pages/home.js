@@ -13,6 +13,7 @@ import Registro from '../images/Bot_ini_azul.png';
 import Noticias from '../images/Bot_ini_amarillo.png';
 import Exploracion from '../images/Bot_ini_azulClaro.png';
 import Contacto from '../images/Bot_ini_verde.png';
+import Proximamente from '../images/Proximamente3.png';
 //Object
 export default class cover extends Component {
     //Constructor
@@ -45,6 +46,10 @@ export default class cover extends Component {
     handleContacto = e => {
         e.preventDefault();
         window.location = "/dti/contacto";
+    }
+    handleRegistro = e => {
+        e.preventDefault();
+        window.location = "/dti/registro";
     }
     handleRoutes = e => {
         e.preventDefault();
@@ -100,9 +105,11 @@ export default class cover extends Component {
             isCommit: false
         });
     }
-    handleExploracion = e => {
+    handleModalException = e => {
         e.preventDefault();
-        alert('Próximamente');
+        this.setState({
+            isModal: true
+        });
     }
     //Render
     render() {
@@ -113,11 +120,16 @@ export default class cover extends Component {
                 <div>
                     <Modal show={isModal} onHide={() => this.setState({isModal: false})} dialogClassName="modal-90w" aria-labelledby="contained-modal-title-vcenter" size="lg" centered>
                         <Modal.Header closeButton>
-                            <Modal.Title id="contained-modal-title-vcenter" className="subtitulo">Sab&iacute;a que...</Modal.Title>
+                            <Modal.Title id="contained-modal-title-vcenter" className="subtitulo">Destinos Tur&iacute;sticos Inteligentes</Modal.Title>
                         </Modal.Header>
-                        <Modal.Body>
-                            <h4>Ipsum molestiae natus adipisci modi eligendi? Debitis amet quae undecommodi aspernatur enim, consectetur. Cumque deleniti temporibusipsam atque a dolores quisquam quisquam adipisci possimuslaboriosam. Quibusdam facilis doloribus debitis! Sit quasi quodaccusamus eos quod. Abqconsequuntur eaque quo rem! Mollitiareiciendis porro quo magni incidunt dolore amet atque facilis ipsumdeleniti rem!
-                            </h4>
+                        <Modal.Body className="show-grid">
+                            <Container fluid>
+                                <Row>
+                                    <Col md={{ span: 6, offset: 3 }}>
+                                        <img alt="proximamente" className="imgcover" src={`${Proximamente}`}></img>
+                                    </Col>
+                                </Row>
+                            </Container>
                         </Modal.Body>
                     </Modal>
                 </div>
@@ -140,13 +152,13 @@ export default class cover extends Component {
                             <Col md={{ span: 6, offset: 3 }}>
                                 <CardGroup>
                                     <Card>
-                                        <Card.Img variant="top" src={`${Dti}`} style={{height:'260px', width:'225px', cursor:'pointer'}} onClick={this.handleRoutes} />
+                                        <Card.Img variant="top" src={`${Dti}`} style={{height:'260px', width:'225px', cursor:'pointer'}} onClick={this.handleModalException} />
                                     </Card>
                                     <Card>
-                                        <Card.Img variant="top" src={`${Rutas}`} style={{height:'250px', width:'225px', cursor:'pointer'}} onClick={this.handleRoutes} />
+                                        <Card.Img variant="top" src={`${Rutas}`} style={{height:'250px', width:'225px', cursor:'pointer'}} onClick={this.handleModalException} />
                                     </Card>
                                     <Card>
-                                        <Card.Img variant="top" src={`${Registro}`} style={{height:'250px', width:'225px', cursor:'pointer'}} onClick={this.handleRoutes} />
+                                        <Card.Img variant="top" src={`${Registro}`} style={{height:'250px', width:'225px', cursor:'pointer'}} onClick={this.handleRegistro} />
                                     </Card>
                                 </CardGroup>
                             </Col>
@@ -155,10 +167,10 @@ export default class cover extends Component {
                             <Col md={{ span: 6, offset: 3 }}>
                                 <CardGroup>
                                     <Card>
-                                        <Card.Img variant="top" src={`${Noticias}`} style={{height:'260px', width:'225px', cursor:'pointer'}} onClick={this.handleRoutes} />
+                                        <Card.Img variant="top" src={`${Noticias}`} style={{height:'260px', width:'225px', cursor:'pointer'}} onClick={this.handleModalException} />
                                     </Card>
                                     <Card>
-                                        <Card.Img variant="top" src={`${Exploracion}`} style={{height:'260px', width:'225px', cursor:'pointer'}} onClick={this.handleExploracion} />
+                                        <Card.Img variant="top" src={`${Exploracion}`} style={{height:'260px', width:'225px', cursor:'pointer'}} onClick={this.handleModalException} />
                                     </Card>
                                     <Card>
                                         <Card.Img variant="top" src={`${Contacto}`} style={{height:'260px', width:'225px', cursor:'pointer'}} onClick={this.handleContacto} />
@@ -168,20 +180,7 @@ export default class cover extends Component {
                         </Row>
                     </Container>
                 </section>
-                <br /><hr />
-                {/*
-                <section id="sec3">
-                    <Container fluid>
-                        <Row>
-                            <Col md={{ span: 6, offset: 3 }}>
-                                <Card body className="sombra relleno" border="light">
-                                    <h2 className="subtitulo" onClick={this.handleKW} style={{cursor:'pointer'}}>Sab&iacute;a que...</h2>
-                                    <span style={{fontSize:'1.4em'}}>Gravida dictum fusce ut placerat orci nulla pellentesque. Risus at ultrices mi tempus imperdiet nulla malesuada.</span>
-                                </Card>
-                            </Col>
-                        </Row>
-                    </Container>
-                </section>*/}
+                <br />
                 <section id="sec5">
                     <Footer />
                 </section>

@@ -1,8 +1,39 @@
+a {
+    text-decoration: none;
+}
+input[type='text'] {
+    font-size: 1.3em;
+}  
+input[type='email'] {
+    font-size: 1.3em;
+}
+input[type='file'] {
+    font-size: 1.3em;
+}
+input:hover {
+    border: solid 2px cornflowerblue;
+}
+textarea:hover {
+    border: solid 2px cornflowerblue;
+}
+select:hover {
+    border: solid 2px cornflowerblue;
+}
+.imgproxcover {
+    width: 50%;
+    height: 50%;
+}
 .imgcover {
     width: 100%;
     height: 100%;
     /*border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
+}
+.imgsubcover {
+    width: 55vh;
+    height: 50vh;
+    padding-top: 15px;
+    cursor: pointer;
 }
 .subtitulo {
     font-weight: bold;
@@ -26,6 +57,13 @@
     font-size: 1.4em;
     cursor: pointer;
 }
+.buttonForm {
+    width: 50%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    font-size: 1.4em;
+    cursor: pointer;
+}
 .alerta {
     position: relative;
     bottom: -25px;
@@ -33,23 +71,16 @@
     font-size: 1.3em;
     cursor: pointer;
 }
-@media only screen and (min-width: 768px){
-    div.container {
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-    }    
+.centro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-@media(max-width: 812px){
-    div.container {
-        display: none;
-    }
-}
-@media(max-width: 823px){
-    div.container {
-        display: none;
-    }
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial;
+    font: .9em;
+    color: grey;
 }

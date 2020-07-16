@@ -37,12 +37,6 @@ export default class cover extends Component {
     //API Calls
 
     //Functions
-    handleKW = e => {
-        e.preventDefault();
-        this.setState({
-            isModal: true
-        });
-    }
     handleContacto = e => {
         e.preventDefault();
         window.location = "/dti/contacto";
@@ -53,7 +47,7 @@ export default class cover extends Component {
     }
     handleRoutes = e => {
         e.preventDefault();
-        alert('Próximamente');
+        window.location = "/dti/rutas";
     }
     handleSubmit = async e => {
         e.preventDefault();
@@ -155,7 +149,7 @@ export default class cover extends Component {
                                         <Card.Img variant="top" src={`${Dti}`} style={{height:'260px', width:'225px', cursor:'pointer'}} onClick={this.handleModalException} />
                                     </Card>
                                     <Card>
-                                        <Card.Img variant="top" src={`${Rutas}`} style={{height:'250px', width:'225px', cursor:'pointer'}} onClick={this.handleModalException} />
+                                        <Card.Img variant="top" src={`${Rutas}`} style={{height:'250px', width:'225px', cursor:'pointer'}} onClick={this.handleRoutes} />
                                     </Card>
                                     <Card>
                                         <Card.Img variant="top" src={`${Registro}`} style={{height:'250px', width:'225px', cursor:'pointer'}} onClick={this.handleRegistro} />

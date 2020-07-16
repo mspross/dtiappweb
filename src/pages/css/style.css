@@ -19,13 +19,33 @@ textarea:hover {
 select:hover {
     border: solid 2px cornflowerblue;
 }
+.footerText {
+    font-size: 2.3em;
+}
+.cardbgRoutes1 {
+    background-image:url('../../images/Bot_muro_amarillo.png');
+    background-repeat: repeat-x;
+    background-size:150% auto;
+}
+.cardbgRoutes2 {
+    background-image:url('../../images/Bot_muro_aqua.png');
+    background-repeat: repeat-x;
+    background-size:150% auto;
+}
+.cardbgRoutes3 {
+    background-image:url('../../images/Bot_muro_morado.png');
+    background-repeat: repeat-x;
+    background-size:150% auto;
+}
 .imgproxcover {
     width: 50%;
     height: 50%;
+    cursor: pointer;
 }
 .imgcover {
     width: 100%;
     height: 100%;
+    cursor: pointer;
     /*border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
 }

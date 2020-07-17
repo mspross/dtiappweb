@@ -1,8 +1,9 @@
 //Headers Components
 import React, { Component } from 'react';
-import { Container, Row, Col, Card, CardGroup, Modal } from 'react-bootstrap';
+import { Container, Row, Col, Card, CardGroup } from 'react-bootstrap';
 import APIConf from '../components/apiconfig';
 import Footer from '../components/footer';
+import ModalM from '../components/modal'
 // CSS style sheet
 import './css/style.css';
 // Images
@@ -13,7 +14,6 @@ import Registro from '../images/Bot_ini_azul.png';
 import Noticias from '../images/Bot_ini_amarillo.png';
 import Exploracion from '../images/Bot_ini_azulClaro.png';
 import Contacto from '../images/Bot_ini_verde.png';
-import Proximamente from '../images/Proximamente3.png';
 //Object
 export default class cover extends Component {
     //Constructor
@@ -27,6 +27,8 @@ export default class cover extends Component {
             link: '/dti',
             linkcontacto: '',
             routelink: '/dti/rutas',
+            title: 'Destinos Turisticos Inteligentes',
+            options: 0,
             user: undefined,
             email: undefined,
             comments: undefined,
@@ -102,30 +104,24 @@ export default class cover extends Component {
     handleModalException = e => {
         e.preventDefault();
         this.setState({
-            isModal: true
+            isModal: true,
+            options: 0
+        });
+    }
+    handleModalClose = () => {
+        this.setState({
+            isModal: false,
+            options: 0
         });
     }
     //Render
     render() {
         //JSX Code
-        const { isModal } = this.state;
+        const { isModal, options } = this.state;
         if(isModal){
             return(
                 <div>
-                    <Modal show={isModal} onHide={() => this.setState({isModal: false})} dialogClassName="modal-90w" aria-labelledby="contained-modal-title-vcenter" size="lg" centered>
-                        <Modal.Header closeButton>
-                            <Modal.Title id="contained-modal-title-vcenter" className="subtitulo">Destinos Tur&iacute;sticos Inteligentes</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body className="show-grid">
-                            <Container fluid>
-                                <Row>
-                                    <Col md={{ span: 6, offset: 3 }}>
-                                        <img alt="proximamente" className="imgcover" src={`${Proximamente}`}></img>
-                                    </Col>
-                                </Row>
-                            </Container>
-                        </Modal.Body>
-                    </Modal>
+                    <ModalM show={isModal} onHide={this.handleModalClose} options={options} title={this.state.title} message="" handleModalClose={this.handleModalClose} />
                 </div>
             )
         }else{

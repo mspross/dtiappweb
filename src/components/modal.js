@@ -5,18 +5,18 @@ import { Container, Row, Col, Modal, Button } from 'react-bootstrap';
 import '../../src/pages/css/style.css';
 //Images
 import Proximamente from '../images/Proximamente.png';
-import Ruta1 from '../images/Ruta_01.png';
 //Class
 export default class modalinfo extends Component {
     //Functions
     handleNext = () => {
-        window.location = "/";
+        window.location = this.props.nextImage;
     }
     //Render Data
     render(){
-        let _message = this.props._message;
+        let _message = this.props.message;
         let _title = this.props.title;
         let _options = parseInt(this.props.options);
+        let _image = this.props.image;
         if(_options < 1){
             return(
                 <Modal {...this.props} dialogClassName="modal-90w" aria-labelledby="contained-modal-title-vcenter" size="lg" centered>
@@ -43,15 +43,17 @@ export default class modalinfo extends Component {
                     <Modal.Body className="show-grid">
                         <Container fluid>
                             <Row>
-                                <Col md={{ span: 6, offset: 3 }}>
-                                    <img alt="ruta1" className="imgcover" src={`${Ruta1}`}></img>
-                                    <p>{_message}</p>
+                                <Col md={{ span: 4, offset: 1 }}>
+                                    <img alt="ruta1" className="imgcover" src={`${_image}`}></img>
+                                </Col>
+                                <Col md={{span: 4, offset: 1}}>
+                                    <p className="texto" style={{width:'160%'}}>{`${_message}`}</p>
                                 </Col>
                             </Row>
                         </Container>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="primary" className="button sombra" onClick={this.handleNext}>Conocer Destinos...</Button>
+                        <Button variant="outline-primary" className="button sombra btnText" size="sm" onClick={this.handleNext}>Continuar...</Button>
                     </Modal.Footer>
                 </Modal>
             );

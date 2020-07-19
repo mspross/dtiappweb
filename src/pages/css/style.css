@@ -19,6 +19,9 @@ textarea:hover {
 select:hover {
     border: solid 2px cornflowerblue;
 }
+.btnText {
+    font-size: 1.7em;
+}
 .footerText {
     font-size: 2.3em;
 }
@@ -54,6 +57,12 @@ select:hover {
     height: 50vh;
     padding-top: 15px;
     cursor: pointer;
+}
+.texto {
+    font-weight: 200;
+    font-size: 1.5em;
+    color: darkblue;
+    text-shadow: 2px 2px 4px #000000;
 }
 .subtitulo {
     font-weight: bold;

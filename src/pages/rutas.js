@@ -18,8 +18,10 @@ export default class cover extends Component {
         this.state = {
             isModal: false,
             routelink: '/',
+            nextImage: '/dti/destinos',
             title: '',
             message: '',
+            image: null,
             options: 0
         }
         sessionStorage.clear();
@@ -41,12 +43,13 @@ export default class cover extends Component {
     }
     handleDestinos = e => {
         e.preventDefault();
-        sessionStorage.setItem('Ruta', e.target.name);
+        sessionStorage.setItem('Ruta', e.target.id);
         this.setState({
             isModal: true,
-            title: 'Ruta Aventura',
-            message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-            options: 1
+            title: e.target.name,
+            message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+            options: 1,
+            image: e.target.src
         });
     }
     handleModalClose = () => {
@@ -59,11 +62,11 @@ export default class cover extends Component {
     //Render
     render() {
         //JSX Code
-        const { isModal, options, message, title } = this.state;
+        const { isModal, options, message, title, nextImage, image } = this.state;
         if(isModal){
             return(
                 <div>
-                    <ModalM show={isModal} onHide={this.handleModalClose} options={options} title={title} message={message} />
+                    <ModalM show={isModal} onHide={this.handleModalClose} options={options} title={title} message={message} nextImage={nextImage} image={image} />
                 </div>
             )
         }else{
@@ -84,15 +87,15 @@ export default class cover extends Component {
                             <Col md={{ span: 6, offset: 3 }}>
                                 <CardGroup>
                                     <Card id="route1" className="cardbgRoutes1 text-center">
-                                        <Card.Img variant="top" src={`${Ruta1}`} style={{height:'260px', width:'225px', cursor:'pointer'}} name="5e8f96001c9d440000fb4981" onClick={this.handleDestinos} />
+                                        <Card.Img variant="top" src={`${Ruta1}`} style={{height:'260px', width:'225px', cursor:'pointer'}} id="5e8f96001c9d440000fb4981" name="Ruta Aventura" onClick={this.handleDestinos} />
                                         <Card.Footer className="text-muted subtitulo footerText">Ruta Aventura</Card.Footer>
                                     </Card>
                                     <Card className="cardbgRoutes2 centro">
-                                        <Card.Img variant="top" src={`${Ruta2}`} style={{height:'250px', width:'225px', cursor:'pointer'}} name="2" onClick={this.handleModalException} />
+                                        <Card.Img variant="top" src={`${Ruta2}`} style={{height:'250px', width:'225px', cursor:'pointer'}} id="2" onClick={this.handleModalException} />
                                         <Card.Footer className="text-muted subtitulo footerText">Ruta 2</Card.Footer>
                                     </Card>
                                     <Card className="cardbgRoutes3 centro">
-                                        <Card.Img variant="top" src={`${Ruta3}`} style={{height:'250px', width:'225px', cursor:'pointer'}} name="3" onClick={this.handleModalException} />
+                                        <Card.Img variant="top" src={`${Ruta3}`} style={{height:'250px', width:'225px', cursor:'pointer'}} id="3" onClick={this.handleModalException} />
                                         <Card.Footer className="text-muted subtitulo footerText">Ruta 3</Card.Footer>
                                     </Card>
                                 </CardGroup>

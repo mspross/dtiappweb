@@ -22,6 +22,7 @@ export default class cover extends Component {
             routelink: '/',
             title: '',
             message: '',
+            nextImage: '/dti/negocios',
             image: null,
             options: 0
         }
@@ -62,11 +63,11 @@ export default class cover extends Component {
     //Render
     render() {
         //JSX Code
-        const { isModal, options, message, title, image } = this.state;
+        const { isModal, options, message, title, image, nextImage } = this.state;
         if(isModal){
             return(
                 <div>
-                    <ModalM show={isModal} onHide={this.handleModalClose} options={options} title={title} message={message} image={image} />
+                    <ModalM show={isModal} onHide={this.handleModalClose} options={options} title={title} message={message} nextImage={nextImage} image={image} />
                 </div>
             )
         }else{

@@ -47,7 +47,7 @@ export default class modalinfo extends Component {
                                     <img alt="ruta1" className="imgcover" src={`${_image}`}></img>
                                 </Col>
                                 <Col md={{span: 4, offset: 1}}>
-                                    <p className="texto" style={{width:'160%'}}>{`${_message}`}</p>
+                                    <p className="texto" style={{width:'100%'}}>{`${_message}`}</p>
                                 </Col>
                             </Row>
                         </Container>

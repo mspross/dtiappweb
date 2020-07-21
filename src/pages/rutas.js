@@ -43,13 +43,15 @@ export default class cover extends Component {
     }
     handleDestinos = e => {
         e.preventDefault();
-        sessionStorage.setItem('Ruta', e.target.id);
+        let _id = e.target.id;
+        let _src = e.target.src;
+        sessionStorage.setItem('Ruta', _id);
         this.setState({
             isModal: true,
             title: e.target.name,
             message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
             options: 1,
-            image: e.target.src
+            image: _src
         });
     }
     handleModalClose = () => {
@@ -91,11 +93,11 @@ export default class cover extends Component {
                                         <Card.Footer className="text-muted subtitulo footerText">Ruta Aventura</Card.Footer>
                                     </Card>
                                     <Card className="cardbgRoutes2 centro">
-                                        <Card.Img variant="top" src={`${Ruta2}`} style={{height:'250px', width:'225px', cursor:'pointer'}} id="2" onClick={this.handleModalException} />
+                                        <Card.Img variant="top" src={`${Ruta2}`} style={{height:'250px', width:'225px', cursor:'pointer'}} id="2" name="Ruta 2" onClick={this.handleModalException} />
                                         <Card.Footer className="text-muted subtitulo footerText">Ruta 2</Card.Footer>
                                     </Card>
                                     <Card className="cardbgRoutes3 centro">
-                                        <Card.Img variant="top" src={`${Ruta3}`} style={{height:'250px', width:'225px', cursor:'pointer'}} id="3" onClick={this.handleModalException} />
+                                        <Card.Img variant="top" src={`${Ruta3}`} style={{height:'250px', width:'225px', cursor:'pointer'}} id="3" name="Ruta 3" onClick={this.handleModalException} />
                                         <Card.Footer className="text-muted subtitulo footerText">Ruta 3</Card.Footer>
                                     </Card>
                                 </CardGroup>

@@ -165,33 +165,9 @@ export default class nuevosnegocios extends Component {
             objNegocios.pricelevel = this.state.pricelevel;
             objNegocios.travelID = this.state.travelID > 0 ? this.state.travelID : "";
             //Add object
-            var blob = new Blob([objNegocios], {type: "text/json"});
             formData.append('imagen1', imgFile);
-            formData.append('Obj', blob);
-
-            this.setState({
-                msgText: "Nuevo negocio creado",
-                options: 2,
-                name: '',
-                address: '',
-                email: '',
-                description: '',
-                phone: '',
-                typeOfBusiness: '',
-                sign: '',
-                manager: '',
-                file: '',
-                checkinout: '',
-                openclose: '',
-                item1: '',
-                item2: '',
-                item3: '',
-                item4: '',
-                item5: '',
-                pricelevel: '',
-                travelID: ''
-            });
-            console.log(formData.get('Obj'));
+            //Upload image to server
+            
         }
         /*try{
             let _result = await APIConf.post('/load', {formData});

@@ -14,7 +14,7 @@ import Negocio4 from '../images/Cultura1.png';
 import Negocio5 from '../images/Artesanias1.png';
 import Negocio6 from '../images/Recomendados1.png';
 //Object
-export default class cover extends Component {
+export default class detalles extends Component {
     //Constructor
     constructor(props){
         super(props);

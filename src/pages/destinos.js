@@ -22,7 +22,7 @@ export default class cover extends Component {
             routelink: '/',
             title: '',
             message: '',
-            nextImage: '/dti/negocios',
+            nextImage: '/dti/detalles',
             image: null,
             options: 0
         }

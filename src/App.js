@@ -7,7 +7,7 @@ import Destinos from './pages/destinos';
 import Contacto from './pages/contacto';
 import Registro from './pages/registro';
 import NewNegocio from './pages/negociosform';
-import Negocios from './pages/negocios';
+import Detalles from './pages/detalles';
 //Function
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
         <Route path="/dti/destinos" component={props => <Destinos {...props} />} />
         <Route path="/dti/contacto" component={props => <Contacto {...props}/>} />
         <Route path="/dti/registro" component={props => <Registro {...props}/>} />
-        <Route path="/dti/negocios" component={props => <Negocios {...props}/>} />
+        <Route path="/dti/detalles" component={props => <Detalles {...props}/>} />
         <Route path="/dti/negocios/nuevo" component={props => <NewNegocio {...props}/>} /> 
       </Switch>
     </BrowserRouter>

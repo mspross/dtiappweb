@@ -1,6 +1,7 @@
 //Headers Components
 import React, { Component } from 'react';
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
+import { MdContactMail, MdFingerprint, MdLaunch, MdLightbulbOutline, MdAccountCircle } from "react-icons/md";
 import APIConf from '../components/apiconfig';
 import Footer from '../components/footer';
 import Subcover from '../components/subcover';
@@ -20,7 +21,8 @@ export default class login extends Component {
             name: undefined,
             user: undefined,
             pwd: undefined,
-            level: null,
+            pwd2:undefined,
+            level: 1,
             msgStatus: null,
             msgText: null,
             flag: false
@@ -31,40 +33,56 @@ export default class login extends Component {
         this.setState({
             isLoading: true,
             options: 0
-        });
-        try{
-            let _res = await APIConf.post('/user/sign', {
-                userID: this.state.user,
-                name: this.state.name,
-                pwd: this.state.pwd,
-                level: this.state.level
-            });
+        });        
+        //Validate mails
+        let _pwd1 = this.state.pwd;
+        let _pwd2 = this.state.pwd2;
+        if(_pwd1 === _pwd2){
+            try{
+                let _res = await APIConf.post('/user/sign', {
+                    userID: this.state.user,
+                    name: this.state.name,
+                    pwd: this.state.pwd,
+                    level: this.state.level
+                });
+                this.setState({
+                    isLoading: false,
+                    options: 2,
+                    user: '',
+                    name: '',
+                    pwd: '',
+                    pwd2:'',
+                    msgStatus: _res.data.status,
+                    msgText: 'Registro exitoso!'
+                });
+            }catch(error){
+                if(error.response.data !== null){
+                    this.setState({
+                        isLoading: false,
+                        options: 1,
+                        msgStatus: error.response.data.status,
+                        msgText: error.response.data.message    
+                    })    
+                }else{
+                    this.setState({
+                        isLoading: false,
+                        options: 1,
+                        msgStatus: '400',
+                        msgText: 'Uuupss!! Algo salio mal. Intente nuevamente, por favor.'
+                    })    
+                }
+            }
+        }else{
             this.setState({
                 isLoading: false,
-                options: 2,
+                options: 1,
+                msgStatus: '409',
+                msgText: 'Las contraseñas no son iguales',
                 user: '',
                 name: '',
                 pwd: '',
-                level: '',
-                msgStatus: _res.data.status,
-                msgText: 'Registro exitoso!'
-            });
-        }catch(error){
-            if(error.response.data !== null){
-                this.setState({
-                    isLoading: false,
-                    options: 1,
-                    msgStatus: error.response.data.status,
-                    msgText: error.response.data.message    
-                })    
-            }else{
-                this.setState({
-                    isLoading: false,
-                    options: 1,
-                    msgStatus: '400',
-                    msgText: 'Uuupss!! Algo salio mal. Intente nuevamente, por favor.'
-                })    
-            }
+                pwd2:'',
+            })    
         }
     }
     handleSubmitLogin = async e => {
@@ -133,7 +151,8 @@ export default class login extends Component {
         e.preventDefault();
         this.setState({
             isError: false,
-            isLoading: false
+            isLoading: false,
+            options: 0
         });
         window.location = "/";
     }
@@ -168,7 +187,7 @@ export default class login extends Component {
                     <section id="sec1">
                         <Subcover handleCloseSession={this.handleCloseSession} />
                     </section>
-                    <hr />
+                    <br />
                     <section id="sec2">
                         <Container fluid>
                             <Row>
@@ -177,51 +196,53 @@ export default class login extends Component {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col md={{ span: 6, offset: 4 }}>
-                                    <Card className="sombra relleno" style={{width:'63%'}}>
+                                <Col md={{ span: 4, offset: 4 }}>
+                                    <Card className="sombra relleno">
                                         <Card.Body>
                                             <Form onSubmit={this.handleSubmitLogin}>
-                                                <Form.Row>
-                                                    <Form.Group as={Col} controlId="formBasicEmail">
-                                                        <Form.Label style={{fontSize: '1.3em'}}>Usuario</Form.Label>
-                                                        <Form.Control 
-                                                        type="text"
-                                                        style={{fontSize: '1.3em'}}
-                                                        placeholder="Ingrese su correo electr&oacute;nico" 
-                                                        name="user" 
-                                                        onChange={this.handleChange} 
-                                                        value={this.state.user} 
-                                                        autoComplete="off" 
-                                                        className="sombra" 
-                                                        required/>
-                                                    </Form.Group>
-                                                </Form.Row>
-                                                <Form.Row>
-                                                    <Form.Group as={Col} controlId="formBasicPwd">
-                                                        <Form.Label style={{fontSize: '1.3em'}}>Contrase&ntilde;a</Form.Label>
-                                                        <Form.Control 
-                                                        type="password"
-                                                        style={{fontSize: '1.3em'}}
-                                                        placeholder="Ingrese su contrase&ntilde;a" 
-                                                        name="pwd" 
-                                                        onChange={this.handleChange} 
-                                                        value={this.state.pwd} 
-                                                        autoComplete="off" 
-                                                        className="sombra" 
-                                                        required/>
-                                                    </Form.Group>
-                                                </Form.Row>
-                                                <Button variant="outline-success" type="Submit" className="button" size="sm">Continuar...</Button>
+                                            <Form.Row>
+                                                <MdContactMail style={{height:'8%', width:'8%'}} />
+                                                <Form.Group as={Col} controlId="formBasicEmail">
+                                                    <Form.Control 
+                                                    type="text"
+                                                    style={{fontSize: '1.1em'}}
+                                                    placeholder="Correo electr&oacute;nico" 
+                                                    maxLength="100" 
+                                                    name="user" 
+                                                    onChange={this.handleChange} 
+                                                    value={this.state.user} 
+                                                    autoComplete="off"
+                                                    className="sombra"  
+                                                    required/>
+                                                </Form.Group>
+                                            </Form.Row>
+                                            <Form.Row>
+                                                <MdFingerprint style={{height:'8%', width:'8%'}} />
+                                                <Form.Group as={Col} controlId="formBasicPwd">
+                                                    <Form.Control 
+                                                    type="password"
+                                                    style={{fontSize: '1.1em'}}
+                                                    placeholder="Contrase&ntilde;a" 
+                                                    name="pwd" 
+                                                    onChange={this.handleChange} 
+                                                    value={this.state.pwd} 
+                                                    autoComplete="off" 
+                                                    className="sombra" 
+                                                    required/>
+                                                </Form.Group>
+                                            </Form.Row>
+                                            <Button variant="outline-success" type="Submit" className="button" size="sm">Validar...&nbsp;&nbsp;&nbsp;<MdLaunch /></Button>
                                             </Form>
+                                            <br/>
+                                            <MdLightbulbOutline style={{height:'5%', width:'5%'}}/>
+                                            <span style={{fontSize: '1.3em', cursor:'pointer'}} onClick={this.handleRegistry}>¿Desea anunciarse con nosotros? Registrese y participe</span>
                                         </Card.Body>
                                     </Card>
-                                    <br/>
-                                    <span style={{fontSize: '1.3em', cursor:'pointer'}} onClick={this.handleRegistry}>¿Desea anunciarse con nosotros? Registrese y participe</span>
                                 </Col>
                             </Row>
                         </Container>
                     </section>
-                    <hr />
+                    <br />
                     <section id="sec3">
                         <Footer />
                     </section>
@@ -236,7 +257,7 @@ export default class login extends Component {
                     <section id="sec1">
                         <Subcover handleCloseSession={this.handleCloseSession} />
                     </section>
-                    <hr />
+                    <br />
                     <section id="sec2">
                         <Container fluid>
                             <Row>
@@ -250,12 +271,12 @@ export default class login extends Component {
                                         <Card.Body>
                                             <Form onSubmit={this.handleSubmitRegistro}>
                                                 <Form.Row>
+                                                    <MdAccountCircle style={{height:'5%', width:'5%'}}/>
                                                     <Form.Group as={Col} controlId="formBasicName">
-                                                        <Form.Label style={{fontSize: '1.3em'}}>Nombre</Form.Label>
                                                         <Form.Control 
                                                         type="text"
-                                                        style={{fontSize: '1.3em'}}
-                                                        placeholder="Ingrese su nombre" 
+                                                        style={{fontSize: '1.1em'}}
+                                                        placeholder="Nombre" 
                                                         maxLength="100" 
                                                         name="name" 
                                                         onChange={this.handleChange} 
@@ -264,12 +285,13 @@ export default class login extends Component {
                                                         className="sombra" 
                                                         required/>
                                                     </Form.Group>
+                                                    &nbsp;&nbsp;
+                                                    <MdContactMail style={{height:'5%', width:'5%'}}/>
                                                     <Form.Group as={Col} controlId="formBasicEmail">
-                                                        <Form.Label style={{fontSize: '1.3em'}}>Usuario</Form.Label>
                                                         <Form.Control 
                                                         type="text"
-                                                        style={{fontSize: '1.3em'}}
-                                                        placeholder="Ingrese su correo electr&oacute;nico" 
+                                                        style={{fontSize: '1.1em'}}
+                                                        placeholder="Correo electr&oacute;nico" 
                                                         name="user" 
                                                         onChange={this.handleChange} 
                                                         value={this.state.user} 
@@ -279,12 +301,12 @@ export default class login extends Component {
                                                     </Form.Group>
                                                 </Form.Row>
                                                 <Form.Row>
+                                                    <MdFingerprint style={{height:'5%', width:'5%'}}/>
                                                     <Form.Group as={Col} controlId="formBasicPwd">
-                                                        <Form.Label style={{fontSize: '1.3em'}}>Contrase&ntilde;a</Form.Label>
                                                         <Form.Control 
                                                         type="password"
-                                                        style={{fontSize: '1.3em'}}
-                                                        placeholder="Ingrese su contrase&ntilde;a" 
+                                                        style={{fontSize: '1.1em'}}
+                                                        placeholder="Contrase&ntilde;a" 
                                                         name="pwd" 
                                                         onChange={this.handleChange} 
                                                         value={this.state.pwd} 
@@ -292,16 +314,16 @@ export default class login extends Component {
                                                         className="sombra" 
                                                         required/>
                                                     </Form.Group>
-                                                    <Form.Group as={Col} controlId="formBasicLevel">
-                                                        <Form.Label style={{fontSize: '1.3em'}}>Nivel Acceso</Form.Label>
+                                                    &nbsp;&nbsp;
+                                                    <MdFingerprint style={{height:'5%', width:'5%'}}/>
+                                                    <Form.Group as={Col} controlId="formBasicPwd2">
                                                         <Form.Control 
-                                                        type="text"
-                                                        style={{fontSize: '1.3em'}}
-                                                        placeholder="Ingrese Nivel"
-                                                        maxLength="1" 
-                                                        name="level"
+                                                        type="password"
+                                                        style={{fontSize: '1.1em'}}
+                                                        placeholder="Contrase&ntilde;a" 
+                                                        name="pwd2" 
                                                         onChange={this.handleChange} 
-                                                        value={this.state.level} 
+                                                        value={this.state.pwd2} 
                                                         autoComplete="off" 
                                                         className="sombra" 
                                                         required/>
@@ -315,7 +337,7 @@ export default class login extends Component {
                             </Row>
                         </Container>
                     </section>
-                    <hr />
+                    <br/>
                     <section id="sec3">
                         <Footer />
                     </section>

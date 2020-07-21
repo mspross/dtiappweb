@@ -1,6 +1,7 @@
 //Headers Components
 import React, { Component } from 'react';
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
+import { MdDone, MdContactMail, MdComment, MdAccountCircle } from "react-icons/md";
 import APIConf from '../components/apiconfig';
 import Footer from '../components/footer';
 import Notificacion from '../components/notificacion';
@@ -77,12 +78,12 @@ export default class contacto extends Component {
                     <Container fluid>
                         <Row>
                             <Col md={{ span: 6, offset: 4 }}>
-                                <img alt="cntacto" onClick={this.handleReturn} style={{width:'55vh', height:'50vh', paddingTop:'15px', cursor:'pointer'}} src={`${Contacto}`}/>
+                                <img alt="cntacto" onClick={this.handleReturn} style={{width:'53vh', height:'40vh', paddingTop:'15px', cursor:'pointer'}} src={`${Contacto}`}/>
                             </Col>
                         </Row>
                     </Container>
                 </section>
-                <hr />
+                <br />
                 <section id="sec2">
                     <Container fluid>
                         <Row>
@@ -95,45 +96,53 @@ export default class contacto extends Component {
                                 <Card className="sombra relleno">
                                     <Card.Body>
                                         <Form onSubmit={this.handleSubmit}>
-                                            <Form.Group controlId="formBasicName">
-                                                <Form.Control 
-                                                type="text"
-                                                style={{fontSize: '1.3em'}}
-                                                placeholder="Ingrese su nombre" 
-                                                maxLength="100" 
-                                                name="user" 
-                                                onChange={this.handleChange} 
-                                                value={this.state.user} 
-                                                autoComplete="off"
-                                                className="sombra"  
-                                                required/>
-                                            </Form.Group>
-                                            <Form.Group controlId="formBasicEmail">
-                                                <Form.Control 
-                                                type="text"
-                                                style={{fontSize: '1.3em'}}
-                                                placeholder="Ingrese su correo electr&oacute;nico" 
-                                                name="email" 
-                                                onChange={this.handleChange} 
-                                                value={this.state.email} 
-                                                autoComplete="off" 
-                                                className="sombra" 
-                                                required/>
-                                            </Form.Group>
-                                            <Form.Group controlId="formBasicComments">
-                                                <Form.Control 
-                                                as="textarea"
-                                                style={{fontSize: '1.3em'}}
-                                                placeholder="Ingrese sus comentarios" 
-                                                row="4"
-                                                name="comments"
-                                                onChange={this.handleChange} 
-                                                value={this.state.comments} 
-                                                autoComplete="off" 
-                                                className="sombra" 
-                                                required/>
-                                            </Form.Group>
-                                            <Button variant="outline-success" type="Submit" className="button" size="sm">Enviar</Button>
+                                            <Form.Row>
+                                                <MdAccountCircle style={{height:'5%', width:'5%'}} />
+                                                <Form.Group as={Col} controlId="formBasicName">
+                                                    <Form.Control 
+                                                    type="text"
+                                                    style={{fontSize: '1.1em'}}
+                                                    placeholder="Nombre" 
+                                                    maxLength="100" 
+                                                    name="user" 
+                                                    onChange={this.handleChange} 
+                                                    value={this.state.user} 
+                                                    autoComplete="off"
+                                                    className="sombra"  
+                                                    required/>
+                                                </Form.Group>
+                                                &nbsp;&nbsp;
+                                                <MdContactMail style={{height:'5%', width:'5%'}} />
+                                                <Form.Group as={Col} controlId="formBasicEmail">
+                                                    <Form.Control 
+                                                    type="text"
+                                                    style={{fontSize: '1.1em'}}
+                                                    placeholder="Correo electr&oacute;nico" 
+                                                    name="email" 
+                                                    onChange={this.handleChange} 
+                                                    value={this.state.email} 
+                                                    autoComplete="off" 
+                                                    className="sombra" 
+                                                    required/>
+                                                </Form.Group>
+                                            </Form.Row>
+                                            <Form.Row>
+                                                <MdComment style={{height:'5%', width:'5%'}} />
+                                                <Form.Group as={Col} controlId="formBasicComments">
+                                                    <Form.Control 
+                                                    as="textarea"
+                                                    style={{fontSize: '1.1em'}}
+                                                    placeholder="Comentarios" 
+                                                    row="2"
+                                                    name="comments"
+                                                    onChange={this.handleChange} 
+                                                    value={this.state.comments} 
+                                                    autoComplete="off" 
+                                                    className="sombra" 
+                                                    required/>
+                                                </Form.Group>
+                                            </Form.Row>
+                                            <Button variant="outline-success" type="Submit" className="button" size="sm">Enviar&nbsp;&nbsp;<MdDone /></Button>
                                         </Form>
                                     </Card.Body>
                                 </Card>
@@ -141,7 +150,7 @@ export default class contacto extends Component {
                         </Row>
                     </Container>
                 </section>
-                <hr />
+                <br/>
                 <section id="sec3">
                     <Footer />
                 </section>

@@ -7,12 +7,12 @@ import ModalM from '../components/modal'
 import './css/style.css';
 // Images
 import Cover from '../images/Negocios.jpg';
-import Destino1 from '../images/Hoteles1.png';
-import Destino2 from '../images/Ferias1.png';
-import Destino3 from '../images/Gastronomia1.png';
-import Destino4 from '../images/Cultura1.png';
-import Destino5 from '../images/Artesanias1.png';
-import Destino6 from '../images/Recomendados1.png';
+import Negocio1 from '../images/Hoteles1.png';
+import Negocio2 from '../images/Ferias1.png';
+import Negocio3 from '../images/Gastronomia1.png';
+import Negocio4 from '../images/Cultura1.png';
+import Negocio5 from '../images/Artesanias1.png';
+import Negocio6 from '../images/Recomendados1.png';
 //Object
 export default class cover extends Component {
     //Constructor
@@ -88,13 +88,13 @@ export default class cover extends Component {
                             <Col md={{ span: 6, offset: 3 }}>
                                 <CardGroup>
                                     <Card id="route1" className="text-center">
-                                        <Card.Img variant="top" src={`${Destino1}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="5e8f66b61c9d440000fb497d" name="Mineral del Monte" onClick={this.handleDestinos} />
+                                        <Card.Img variant="top" src={`${Negocio1}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="5e8f66b61c9d440000fb497d" name="Mineral del Monte" onClick={this.handleDestinos} />
                                     </Card>
                                     <Card className="text-center">
-                                        <Card.Img variant="top" src={`${Destino2}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="5e8f66b61c9d440000fb497d" onClick={this.handleModalException} />
+                                        <Card.Img variant="top" src={`${Negocio2}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="5e8f66b61c9d440000fb497d" onClick={this.handleModalException} />
                                     </Card>
                                     <Card className="text-center">
-                                        <Card.Img variant="top" src={`${Destino3}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="5e8f66b61c9d440000fb497d" onClick={this.handleModalException} />
+                                        <Card.Img variant="top" src={`${Negocio3}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="5e8f66b61c9d440000fb497d" onClick={this.handleModalException} />
                                     </Card>
                                 </CardGroup>
                             </Col>
@@ -103,13 +103,13 @@ export default class cover extends Component {
                             <Col md={{ span: 6, offset: 3 }}>
                                 <CardGroup>
                                 <Card id="route1" className="text-center">
-                                        <Card.Img variant="top" src={`${Destino4}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="5e8f66b61c9d440000fb497d" onClick={this.handleModalException} />
+                                        <Card.Img variant="top" src={`${Negocio4}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="5e8f66b61c9d440000fb497d" onClick={this.handleModalException} />
                                     </Card>
                                     <Card className="text-center">
-                                        <Card.Img variant="top" src={`${Destino5}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="5e8f66b61c9d440000fb497d" onClick={this.handleModalException} />
+                                        <Card.Img variant="top" src={`${Negocio5}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="5e8f66b61c9d440000fb497d" onClick={this.handleModalException} />
                                     </Card>
                                     <Card className="text-center">
-                                        <Card.Img variant="top" src={`${Destino6}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="5e8f66b61c9d440000fb497d" onClick={this.handleModalException} />
+                                        <Card.Img variant="top" src={`${Negocio6}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="5e8f66b61c9d440000fb497d" onClick={this.handleModalException} />
                                     </Card>
                                 </CardGroup>
                             </Col>

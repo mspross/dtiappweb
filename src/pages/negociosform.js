@@ -5,7 +5,6 @@ import { toast } from 'react-toastify';
 import APIConf from '../components/apiconfig';
 import Footer from '../components/footer';
 import Subcover from '../components/subcover';
-import objNegocios from '../assets/negocios.json';
 import Notificacion from '../components/notificacion';
 //Style Sheet
 import './css/style.css';
@@ -43,7 +42,8 @@ export default class nuevosnegocios extends Component {
             item5: '',
             pricelevel: undefined,
             travelID: null,
-            linkhome: '/'
+            linkhome: '/',
+            linkrefresh: '/dti/negocios/nuevo'
         }
     }
     //API Calls
@@ -102,29 +102,7 @@ export default class nuevosnegocios extends Component {
         window.location = this.state.linkhome;
     }
     handleNotification = (_message, _options) => (<Notificacion message={_message} options={_options}/>);
-    handleClearForm = () => {
-        this.setState({
-            msgStatus: '',
-            name: '',
-            address: '',
-            email: '',
-            description: '',
-            phone: '',
-            typeOfBusiness: '',
-            sign: '',
-            manager: '',
-            file: '',
-            checkinout: '',
-            openclose: '',
-            item1: '',
-            item2: '',
-            item3: '',
-            item4: '',
-            item5: '',
-            pricelevel: '',
-            travelID: ''
-        });
-    }
+    handleClearForm = () => { window.location = this.state.linkrefresh }
     handleSubmit = async e => {
         e.preventDefault();
         this.setState({
@@ -133,8 +111,6 @@ export default class nuevosnegocios extends Component {
         });
         const types = ['image/png', 'image/jpeg', 'image/gif'];
         const imgFile = this.state.file;
-        const formData = new FormData();
-        const config = { headers: {'content-type': 'multipart/form-data'} };
         if(imgFile.size > 1000000){
             this.setState({
                 msgText: `'${imgFile.name}' demasiado grande, por favor, seleccione otra imagen`,
@@ -145,39 +121,56 @@ export default class nuevosnegocios extends Component {
                 msgText: `'${imgFile.name}' formato no soportado`,
                 options: 1
             });
-        }else{
-            objNegocios.name = this.state.name;      
-            objNegocios.address = this.state.address;
-            objNegocios.email = this.state.email;
-            objNegocios.description = this.state.description;
-            objNegocios.phone = this.state.phone;
-            objNegocios.typeOfBusiness = this.state.typeOfBusiness;
-            objNegocios.sign = sessionStorage.getItem('AuthID').concat(sessionStorage.getItem('Nombre')).concat(sessionStorage.getItem('ID'));
-            objNegocios.manager = sessionStorage.getItem('Nombre');
-            objNegocios.image = imgFile;
-            objNegocios.openclose = this.state.openclose || 'empty';
-            objNegocios.checkinout = this.state.checkinout || 'empty';
-            objNegocios.items.item1 = this.state.item1 || 'empty';
-            objNegocios.items.item2 = this.state.item2 || 'empty';
-            objNegocios.items.item3 = this.state.item3 || 'empty';
-            objNegocios.items.item4 = this.state.item4 || 'empty';
-            objNegocios.items.item5 = this.state.item5 || 'empty';
-            objNegocios.pricelevel = this.state.pricelevel;
-            objNegocios.travelID = this.state.travelID > 0 ? this.state.travelID : "";
-            //Add object
-            formData.append('imagen1', imgFile);
-            //Upload image to server
-            
-        }
-        /*try{
-            let _result = await APIConf.post('/load', {formData});
-        }catch(error){
+        }else if(parseInt(this.state.travelID) === -1 || parseInt(this.state.travelID) === 0 ){
             this.setState({
-                isError: true,
-                isCommit: false,
-                msgText: error.response.data.message
+                msgText: 'No hay un Destino seleccionado',
+                options: 1
             });
-        }*/
+        }else{
+            try{
+                //Prepare object
+                const formData = new FormData()
+                formData.append('imagen1', imgFile);
+                //Upload image to server
+                let _imgUp = await APIConf.post('/upload', formData);
+                //Gather image hashed
+                let _result = await APIConf.post('/business/add', {
+                    name: this.state.name, 
+                    address: this.state.address,
+                    email: this.state.email,
+                    desc: this.state.description,
+                    phone: this.state.phone,
+                    type: this.state.typeOfBusiness,
+                    sign: sessionStorage.getItem('AuthID').concat(sessionStorage.getItem('Nombre')).concat(sessionStorage.getItem('ID')),
+                    manager: sessionStorage.getItem('Nombre'),
+                    imageold: _imgUp.data.data,
+                    imagenew: _imgUp.data.data,
+                    openclose: this.state.openclose || 'empty',
+                    checkinout: this.state.checkinout || 'empty',
+                    item1: this.state.item1 || 'empty',
+                    item2: this.state.item2 || 'empty',
+                    item3: this.state.item3 || 'empty',
+                    item4: this.state.item4 || 'empty',
+                    item5: this.state.item5 || 'empty',
+                    price: this.state.pricelevel,
+                    travelID: this.state.travelID
+                });
+                this.setState({
+                    isError: false,
+                    isCommit: true,
+                    msgText: _result.data.message,
+                    options: 2
+                });
+                setTimeout(this.handleClearForm, 2500);
+            }catch(error){
+                this.setState({
+                    isError: true,
+                    isCommit: false,
+                    msgText: error.response.data.message,
+                    options: 1
+                });
+            }
+        }
     }
     //Render
     render(){
@@ -203,7 +196,7 @@ export default class nuevosnegocios extends Component {
                             <Col md={{ span: 6, offset: 3 }}>
                                 <Card className="sombra relleno">
                                     <Card.Body>
-                                        <Form onSubmit={this.handleSubmit}>
+                                        <Form name="frmRegistro" encType="multipart/form-data" onSubmit={this.handleSubmit}>
                                             <Form.Row>
                                                 <Form.Group as={Col} controlId="formBasicPart1">
                                                     <Form.Label style={{fontSize: '1.3em'}}>Nombre Negocio</Form.Label>
@@ -452,7 +445,7 @@ export default class nuevosnegocios extends Component {
                         </Row>
                     </Container>
                 </section>
-                <hr />
+                <br />
                 <section id="sec9">
                     <Footer/>
                 </section>

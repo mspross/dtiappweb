@@ -204,7 +204,7 @@ export default class login extends Component {
                                                 <MdContactMail style={{height:'8%', width:'8%'}} />
                                                 <Form.Group as={Col} controlId="formBasicEmail">
                                                     <Form.Control 
-                                                    type="text"
+                                                    type="email"
                                                     style={{fontSize: '1.1em'}}
                                                     placeholder="Correo electr&oacute;nico" 
                                                     maxLength="100" 

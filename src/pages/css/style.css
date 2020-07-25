@@ -25,21 +25,6 @@ select:hover {
 .footerText {
     font-size: 2.3em;
 }
-.cardbgRoutes1 {
-    background-image:url('../../images/Bot_muro_amarillo.png');
-    background-repeat: repeat-x;
-    background-size:150% auto;
-}
-.cardbgRoutes2 {
-    background-image:url('../../images/Bot_muro_aqua.png');
-    background-repeat: repeat-x;
-    background-size:150% auto;
-}
-.cardbgRoutes3 {
-    background-image:url('../../images/Bot_muro_morado.png');
-    background-repeat: repeat-x;
-    background-size:150% auto;
-}
 .imgproxcover {
     width: 50%;
     height: 50%;
@@ -112,4 +97,9 @@ select:hover {
     font-family: Arial;
     font: .9em;
     color: grey;
+}
+.redes-sociales {
+    width: 1.2em;
+    height: 1.2em;
+    cursor: pointer;
 }

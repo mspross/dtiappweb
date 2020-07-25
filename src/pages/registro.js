@@ -109,14 +109,14 @@ export default class login extends Component {
             });
             window.location = this.state.linknegocio;
         }catch(error){
-            if(error.response.data !== null){
+            if(error.response === undefined){
                 this.setState({
                     isLoading: false,
                     options: 1,
                     user: '',
                     pwd: '',
-                    msgStatus: error.response.data.status,
-                    msgText: error.response.data.message    
+                    msgStatus: '500',
+                    msgText: 'Uuupss!! Algo salio mal. Intente nuevamente, por favor.'
                 })    
             }else{
                 this.setState({
@@ -124,8 +124,8 @@ export default class login extends Component {
                     options: 1,
                     user: '',
                     pwd: '',
-                    msgStatus: '400',
-                    msgText: 'Uuupss!! Algo salio mal. Intente nuevamente, por favor.'
+                    msgStatus: error.response.data.status,
+                    msgText: error.response.data.message    
                 })    
             }
         }

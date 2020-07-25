@@ -49,9 +49,7 @@ export default class nuevosnegocios extends Component {
     //API Calls
     async UNSAFE_componentWillMount(){
         try{
-            let fetchItems = await APIConf.post('/destiny/status', {
-                status: parseInt(this.state.status)
-            });
+            let fetchItems = await APIConf.get('/destiny/status/'.concat(this.state.status));
             this.setState({
                 travelItem: fetchItems.data.data
             });
@@ -123,7 +121,7 @@ export default class nuevosnegocios extends Component {
             });
         }else if(parseInt(this.state.travelID) === -1 || parseInt(this.state.travelID) === 0 ){
             this.setState({
-                msgText: 'No hay un Destino seleccionado',
+                msgText: 'Seleccione un Destino por favor',
                 options: 1
             });
         }else{

@@ -10,6 +10,13 @@ import Cover from '../images/Pantalla_Rutas2.png';
 import Ruta1 from '../images/Ruta_01.png';
 import Ruta2 from '../images/Ruta_02.png';
 import Ruta3 from '../images/Ruta_03.png';
+import Ruta4 from '../images/Ruta_04.png';
+import Ruta5 from '../images/Ruta_05.png';
+import Ruta6 from '../images/Ruta_06.png';
+import Ruta7 from '../images/Ruta_07.png';
+import Ruta8 from '../images/Ruta_08.png';
+import Ruta9 from '../images/Ruta_09.png';
+import Ruta10 from '../images/Ruta_10.png';
 //Object
 export default class cover extends Component {
     //Constructor
@@ -88,18 +95,44 @@ export default class cover extends Component {
                         <Row>
                             <Col md={{ span: 6, offset: 3 }}>
                                 <CardGroup>
-                                    <Card id="route1" className="cardbgRoutes1 text-center">
-                                        <Card.Img variant="top" src={`${Ruta1}`} style={{height:'260px', width:'225px', cursor:'pointer'}} id="5e8f96001c9d440000fb4981" name="Ruta Aventura" onClick={this.handleDestinos} />
-                                        <Card.Footer className="text-muted subtitulo footerText">Ruta Aventura</Card.Footer>
+                                    <Card id="route1" className="text-center">
+                                        <Card.Img variant="top" src={`${Ruta1}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="5e8f96001c9d440000fb4981" name="Ruta 1" onClick={this.handleDestinos} />
                                     </Card>
-                                    <Card className="cardbgRoutes2 centro">
+                                    <Card className="text-center">
                                         <Card.Img variant="top" src={`${Ruta2}`} style={{height:'250px', width:'225px', cursor:'pointer'}} id="2" name="Ruta 2" onClick={this.handleModalException} />
-                                        <Card.Footer className="text-muted subtitulo footerText">Ruta 2</Card.Footer>
                                     </Card>
-                                    <Card className="cardbgRoutes3 centro">
+                                    <Card className="text-center">
                                         <Card.Img variant="top" src={`${Ruta3}`} style={{height:'250px', width:'225px', cursor:'pointer'}} id="3" name="Ruta 3" onClick={this.handleModalException} />
-                                        <Card.Footer className="text-muted subtitulo footerText">Ruta 3</Card.Footer>
                                     </Card>
+                                </CardGroup>
+                                <CardGroup>
+                                    <Card className="text-center">
+                                        <Card.Img variant="top" src={`${Ruta4}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="4" name="Ruta 4" onClick={this.handleModalException} />
+                                    </Card>
+                                    <Card className="text-center">
+                                        <Card.Img variant="top" src={`${Ruta5}`} style={{height:'250px', width:'225px', cursor:'pointer'}} id="5" name="Ruta 5" onClick={this.handleModalException} />
+                                    </Card>
+                                    <Card className="text-center">
+                                        <Card.Img variant="top" src={`${Ruta6}`} style={{height:'250px', width:'225px', cursor:'pointer'}} id="6" name="Ruta 6" onClick={this.handleModalException} />
+                                    </Card>
+                                </CardGroup>
+                                <CardGroup>
+                                    <Card className="text-center">
+                                        <Card.Img variant="top" src={`${Ruta7}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="7" name="Ruta 7" onClick={this.handleModalException} />
+                                    </Card>
+                                    <Card className="text-center">
+                                        <Card.Img variant="top" src={`${Ruta8}`} style={{height:'250px', width:'225px', cursor:'pointer'}} id="8" name="Ruta 8" onClick={this.handleModalException} />
+                                    </Card>
+                                    <Card className="text-center">
+                                        <Card.Img variant="top" src={`${Ruta9}`} style={{height:'250px', width:'225px', cursor:'pointer'}} id="9" name="Ruta 9" onClick={this.handleModalException} />
+                                    </Card>
+                                </CardGroup>
+                                <CardGroup>
+                                    <Card className="text-center">
+                                        <Card.Img variant="top" src={`${Ruta10}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="10" name="Ruta 10" onClick={this.handleModalException} />
+                                    </Card>
+                                    <Card className="text-center">&nbsp;</Card>
+                                    <Card className="text-center">&nbsp;</Card>
                                 </CardGroup>
                             </Col>
                         </Row>

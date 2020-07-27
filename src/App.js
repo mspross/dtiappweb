@@ -8,6 +8,7 @@ import Contacto from './pages/contacto';
 import Registro from './pages/registro';
 import NewNegocio from './pages/negociosform';
 import Detalles from './pages/detalles';
+import Preorden from './pages/preorden';
 //Function
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/dti/contacto" component={props => <Contacto {...props}/>} />
         <Route path="/dti/registro" component={props => <Registro {...props}/>} />
         <Route path="/dti/detalles" component={props => <Detalles {...props}/>} />
+        <Route path="/dti/preorden" component={props => <Preorden {...props}/>} />
         <Route path="/dti/negocios/nuevo" component={props => <NewNegocio {...props}/>} /> 
       </Switch>
     </BrowserRouter>

@@ -1,0 +1,72 @@
+.imgcover {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    /*border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
+}
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px 20px;
+}
+.cardss {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+.cardd {
+    cursor: pointer;
+    background-color: transparent;
+    height: 300px;
+    perspective: 1000px;
+}
+.cardd h1 {
+    font-size: 25px;
+    border-bottom: 1px #fff solid;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+.cardd img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+.cardd-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+.cardd:hover .cardd-inner {
+    transform: rotateY(180deg);
+}
+.cardd-front,
+.cardd-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.cardd-back {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    transform: rotateY(180deg);
+}
+.cardd li {
+    list-style: none;
+    padding-bottom: 10px;
+}
+@media (max-width: 800px) {
+    .cardss {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 500px) {
+    .cardss {
+        grid-template-columns: 1fr;
+    }
+}

@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Card, CardGroup } from 'react-bootstrap';
 import Footer from '../components/footer';
-import ModalM from '../components/modal'
+import Preorden from './preorden';
 // CSS style sheet
 import './css/style.css';
 // Images
@@ -24,7 +24,8 @@ export default class detalles extends Component {
             title: '',
             message: '',
             image: null,
-            options: 0
+            options: 0,
+            travel: sessionStorage.getItem("Destino")
         }
     }
     //API Calls
@@ -44,13 +45,11 @@ export default class detalles extends Component {
     }
     handleDestinos = e => {
         e.preventDefault();
-        sessionStorage.setItem('Destino', e.target.id);
         this.setState({
             isModal: true,
-            title: e.target.name,
-            message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
             options: 1,
-            image: e.target.src
+            image: e.target.src,
+            type: e.target.id
         });
     }
     handleModalClose = () => {
@@ -63,11 +62,11 @@ export default class detalles extends Component {
     //Render
     render() {
         //JSX Code
-        const { isModal, options, message, title, image } = this.state;
+        const { isModal, image, type, travel } = this.state;
         if(isModal){
             return(
                 <div>
-                    <ModalM show={isModal} onHide={this.handleModalClose} options={options} title={title} message={message} image={image} />
+                    <Preorden image={image} typeOfBusiness={type} travelID={travel} handleModalClose={this.handleModalClose}/>
                 </div>
             )
         }else{
@@ -88,13 +87,13 @@ export default class detalles extends Component {
                             <Col md={{ span: 6, offset: 3 }}>
                                 <CardGroup>
                                     <Card id="route1" className="text-center">
-                                        <Card.Img variant="top" src={`${Negocio1}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="5e8f66b61c9d440000fb497d" name="Mineral del Monte" onClick={this.handleDestinos} />
+                                        <Card.Img variant="top" src={`${Negocio1}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="Hospedaje" name="Mineral del Monte" onClick={this.handleDestinos} />
                                     </Card>
                                     <Card className="text-center">
-                                        <Card.Img variant="top" src={`${Negocio2}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="5e8f66b61c9d440000fb497d" onClick={this.handleModalException} />
+                                        <Card.Img variant="top" src={`${Negocio2}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="Ferias-Eventos" onClick={this.handleDestinos} />
                                     </Card>
                                     <Card className="text-center">
-                                        <Card.Img variant="top" src={`${Negocio3}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="5e8f66b61c9d440000fb497d" onClick={this.handleModalException} />
+                                        <Card.Img variant="top" src={`${Negocio3}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="Gastronomia" onClick={this.handleDestinos} />
                                     </Card>
                                 </CardGroup>
                             </Col>
@@ -103,13 +102,13 @@ export default class detalles extends Component {
                             <Col md={{ span: 6, offset: 3 }}>
                                 <CardGroup>
                                 <Card id="route1" className="text-center">
-                                        <Card.Img variant="top" src={`${Negocio4}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="5e8f66b61c9d440000fb497d" onClick={this.handleModalException} />
+                                        <Card.Img variant="top" src={`${Negocio4}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="Cultura-Recreacion" onClick={this.handleDestinos} />
                                     </Card>
                                     <Card className="text-center">
-                                        <Card.Img variant="top" src={`${Negocio5}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="5e8f66b61c9d440000fb497d" onClick={this.handleModalException} />
+                                        <Card.Img variant="top" src={`${Negocio5}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="Artesanias" onClick={this.handleDestinos} />
                                     </Card>
                                     <Card className="text-center">
-                                        <Card.Img variant="top" src={`${Negocio6}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="5e8f66b61c9d440000fb497d" onClick={this.handleModalException} />
+                                        <Card.Img variant="top" src={`${Negocio6}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="Recomendados" onClick={this.handleDestinos} />
                                     </Card>
                                 </CardGroup>
                             </Col>

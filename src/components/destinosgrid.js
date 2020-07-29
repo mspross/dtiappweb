@@ -1,18 +1,18 @@
 import React from 'react';
-import NegociosItem from './negociositem';
+import DestinosItem from './destinositem';
 import Spinner from './spinner';
 
-const NegociosGrid = ({ items, isLoading }) => {
+const DestinosGrid = ({ items, isLoading }) => {
     if(isLoading || !items ){
         return( <Spinner /> );
     }else{
         return(
             <div className="container">
                 <section className="cardss">
-                    {items.map(item =>( <NegociosItem key={item._id} obj={item} id={item._id} /> ))}
+                    {items.map(item =>( <DestinosItem key={item._id} obj={item} id={item._id}/> ))}
                 </section>
             </div>
         );
     }
 }
-export default NegociosGrid;
+export default DestinosGrid;

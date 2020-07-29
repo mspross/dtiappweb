@@ -1,6 +1,6 @@
 //Headers Components
 import React, { Component } from 'react';
-import { Container, Row, Col, Card, CardGroup } from 'react-bootstrap';
+import { Container, Row, Col, Card, CardGroup, Button } from 'react-bootstrap';
 import Footer from '../components/footer';
 import Preorden from './preorden';
 // CSS style sheet
@@ -20,11 +20,9 @@ export default class detalles extends Component {
         super(props);
         this.state = {
             isModal: false,
-            routelink: '/',
-            title: '',
-            message: '',
-            image: null,
-            options: 0,
+            routelink: '/dti/destinos',
+            routePrev: '/',
+            image: '',
             travel: sessionStorage.getItem("Destino")
         }
     }
@@ -35,19 +33,10 @@ export default class detalles extends Component {
         e.preventDefault();
         window.location = this.state.routelink;
     }
-    handleModalException = e => {
-        e.preventDefault();
-        this.setState({
-            isModal: true,
-            title: 'Destinos Turisticos Inteligentes',
-            options: 0
-        });
-    }
     handleDestinos = e => {
         e.preventDefault();
         this.setState({
             isModal: true,
-            options: 1,
             image: e.target.src,
             type: e.target.id
         });
@@ -55,9 +44,13 @@ export default class detalles extends Component {
     handleModalClose = () => {
         this.setState({
             isModal: false,
-            title: '',
-            options: 0
+            image: '',
+            type: ''
         });
+    }
+    handlePreview = e => {
+        e.preventDefault();
+        window.location = this.state.routePrev;
     }
     //Render
     render() {
@@ -87,7 +80,7 @@ export default class detalles extends Component {
                             <Col md={{ span: 6, offset: 3 }}>
                                 <CardGroup>
                                     <Card id="route1" className="text-center">
-                                        <Card.Img variant="top" src={`${Negocio1}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="Hospedaje" name="Mineral del Monte" onClick={this.handleDestinos} />
+                                        <Card.Img variant="top" src={`${Negocio1}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="Hospedaje" onClick={this.handleDestinos} />
                                     </Card>
                                     <Card className="text-center">
                                         <Card.Img variant="top" src={`${Negocio2}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="Ferias-Eventos" onClick={this.handleDestinos} />
@@ -112,6 +105,11 @@ export default class detalles extends Component {
                                     </Card>
                                 </CardGroup>
                             </Col>
+                        </Row>
+                        <Row>
+                        <Col md={{ span: 6, offset: 3 }}>
+                            <Button variant="outline-primary" className="button sombra btnText" size="sm" onClick={this.handlePreview}>Revisar Destino Tur&iacute;stico...</Button>
+                        </Col>
                         </Row>
                     </Container>
                 </section>

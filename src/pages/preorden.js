@@ -15,24 +15,19 @@ export default class preorden extends Component {
         this.state = {
             Items: null,
             image: this.props.image,
-            imgBusiness: null,
-            isLoading: false
+            isLoading: true
         }
     }
     //API Calls
     async UNSAFE_componentWillMount(){
-        this.setState({
-            isLoading: true
-        });
         try{
             let fetchItems = await APIConf.get('/business/typetravel/'.concat(this.props.typeOfBusiness).concat('/').concat(this.props.travelID));
             this.setState({
-                Items: fetchItems.data.data,
                 isLoading: false,
+                Items: fetchItems.data.data
             });
         }catch(error){
             this.setState({
-                travelItem: null,
                 isLoading: false
             });
         }
@@ -41,8 +36,8 @@ export default class preorden extends Component {
 
     //Render
     render() {
-        const { image, Items, isLoading } = this.state;
         //JSX Code
+        const { image, Items, isLoading } = this.state;
         return (
             <div>
                 <section id="sec1">
@@ -54,7 +49,7 @@ export default class preorden extends Component {
                         </Row>
                     </Container>
                 </section>
-                <NegociosGrid items={Items} isLoading={isLoading}/>
+                <NegociosGrid items={Items} isLoading={isLoading} />
                 <br />
                 <section id="sec5">
                     <Footer />

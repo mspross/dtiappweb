@@ -31,7 +31,6 @@ export default class cover extends Component {
             image: null,
             options: 0
         }
-        sessionStorage.clear();
     }
     //API Calls
 

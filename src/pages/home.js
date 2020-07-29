@@ -26,6 +26,7 @@ export default class cover extends Component {
             isCommit: false,
             link: '/dti',
             linkcontacto: '',
+            dtiMessage: '',
             routelink: '/dti/rutas',
             title: 'Destinos Turisticos Inteligentes',
             options: 0,
@@ -33,8 +34,9 @@ export default class cover extends Component {
             email: undefined,
             comments: undefined,
             msgStatus: null,
-            msgText: null
+            msgText: null,
         }
+        sessionStorage.clear();
     }
     //API Calls
 
@@ -114,14 +116,23 @@ export default class cover extends Component {
             options: 0
         });
     }
+    handleDti = e => {
+        e.preventDefault();
+        this.setState({
+            isModal: true,
+            options: 2,
+            dtiMessage: "Un Destino Turístico Inteligente es un espacio innovador, accesible a todos, apoyado en una estructura tecnológica de vanguardia, que garantiza el desarrollo sostenible del territorio turístico, y facilita la interacción e integración del visitante con el entorno, incrementando la calidad de su experiencia en el destino",
+            image: e.target.src
+        });
+    }
     //Render
     render() {
         //JSX Code
-        const { isModal, options } = this.state;
+        const { isModal, options, dtiMessage, image } = this.state;
         if(isModal){
             return(
                 <div>
-                    <ModalM show={isModal} onHide={this.handleModalClose} options={options} title={this.state.title} message="" handleModalClose={this.handleModalClose} />
+                    <ModalM show={isModal} onHide={this.handleModalClose} options={options} title={this.state.title} message={dtiMessage} image={image} handleModalClose={this.handleModalClose} />
                 </div>
             )
         }else{
@@ -142,7 +153,7 @@ export default class cover extends Component {
                             <Col md={{ span: 6, offset: 3 }}>
                                 <CardGroup>
                                     <Card>
-                                        <Card.Img variant="top" src={`${Dti}`} style={{height:'260px', width:'225px', cursor:'pointer'}} onClick={this.handleModalException} />
+                                        <Card.Img variant="top" src={`${Dti}`} style={{height:'260px', width:'225px', cursor:'pointer'}} onClick={this.handleDti} />
                                     </Card>
                                     <Card>
                                         <Card.Img variant="top" src={`${Rutas}`} style={{height:'250px', width:'225px', cursor:'pointer'}} onClick={this.handleRoutes} />

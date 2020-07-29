@@ -4,4 +4,6 @@ build/
 .DS_Store
 *.test
 *.chk
+*.tar.gz
+*.gz
 

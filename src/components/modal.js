@@ -57,6 +57,26 @@ export default class modalinfo extends Component {
                     </Modal.Footer>
                 </Modal>
             );
+        }else if(_options === 2){
+            return(
+                <Modal {...this.props} dialogClassName="modal-90w" aria-labelledby="contained-modal-title-vcenter" size="lg">
+                    <Modal.Header closeButton>
+                        <Modal.Title id="contained-modal-title-vcenter" className="subtitulo">{`${_title}`}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body className="show-grid">
+                        <Container fluid>
+                            <Row>
+                                <Col md={{ span: 4, offset: 1 }}>
+                                    <img alt="ruta1" className="imgcover" src={`${_image}`}></img>
+                                </Col>
+                                <Col md={{span: 4, offset: 1}}>
+                                    <p className="texto" style={{width:'100%'}}>{`${_message}`}</p>
+                                </Col>
+                            </Row>
+                        </Container>
+                    </Modal.Body>
+                </Modal>
+            );
         }
     }
 }

@@ -21,7 +21,7 @@ export default class detalles extends Component {
         this.state = {
             isModal: false,
             routelink: '/dti/destinos',
-            routePrev: '/',
+            routePrev: '/dti/orden',
             image: '',
             travel: sessionStorage.getItem("Destino")
         }

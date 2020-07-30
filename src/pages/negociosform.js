@@ -279,7 +279,7 @@ export default class nuevosnegocios extends Component {
                                                         <option value="Hospedaje" id="1">Hospedaje</option>
                                                         <option value="Gastronomia" id="2">Gastronom&iacute;a</option>
                                                         <option value="Cultura-Recreacion" id="3">Cultura Recreaci&oacute;n</option>
-                                                        <option value="Ferias Eventos" id="4">Ferias Eventos</option>
+                                                        <option value="Ferias-Eventos" id="4">Ferias Eventos</option>
                                                         <option value="Artesanias" id="5">Artesanias</option>
                                                     </Form.Control>
                                                 </Form.Group>

@@ -7,10 +7,6 @@ import '../../src/pages/css/style.css';
 import Proximamente from '../images/Proximamente.png';
 //Class
 export default class modalinfo extends Component {
-    //Functions
-    handleNext = () => {
-        window.location = this.props.nextImage;
-    }
     //Render Data
     render(){
         let _message = this.props.message;
@@ -53,7 +49,7 @@ export default class modalinfo extends Component {
                         </Container>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="outline-primary" className="button sombra btnText" size="sm" onClick={this.handleNext}>Continuar...</Button>
+                        <Button variant="outline-primary" className="button sombra btnText" size="sm" onClick={this.props.handleNext}>Continuar...</Button>
                     </Modal.Footer>
                 </Modal>
             );

@@ -39,6 +39,10 @@ export default class cover extends Component {
         e.preventDefault();
         window.location = this.state.routelink;
     }
+    handleNext = e => {
+        e.preventDefault();
+        window.location = this.state.nextImage;
+    }
     handleModalException = e => {
         e.preventDefault();
         this.setState({
@@ -70,11 +74,11 @@ export default class cover extends Component {
     //Render
     render() {
         //JSX Code
-        const { isModal, options, message, title, nextImage, image } = this.state;
+        const { isModal, options, message, title, image } = this.state;
         if(isModal){
             return(
                 <div>
-                    <ModalM show={isModal} onHide={this.handleModalClose} options={options} title={title} message={message} nextImage={nextImage} image={image} />
+                    <ModalM show={isModal} onHide={this.handleModalClose} options={options} title={title} message={message} handleNext={this.handleNext} image={image} />
                 </div>
             )
         }else{

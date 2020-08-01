@@ -1,8 +1,8 @@
 //Headers Components
 import React, { Component } from 'react';
-import { Container, Row, Col, Card, CardGroup } from 'react-bootstrap';
+import { Container, Row, Col, Image, Card, CardGroup } from 'react-bootstrap';
 import Footer from '../components/footer';
-import ModalM from '../components/modal'
+import ModalM from '../components/modal';
 // CSS style sheet
 import './css/style.css';
 // Images
@@ -77,23 +77,19 @@ export default class cover extends Component {
         const { isModal, options, message, title, image } = this.state;
         if(isModal){
             return(
-                <div>
-                    <ModalM show={isModal} onHide={this.handleModalClose} options={options} title={title} message={message} handleNext={this.handleNext} image={image} />
-                </div>
+                <ModalM show={isModal} onHide={this.handleModalClose} options={options} title={title} message={message} handleNext={this.handleNext} image={image} />
             )
         }else{
             return (
                 <div>
                 <section id="sec1">
-                    <Container fluid>
+                    <Container>
                         <Row>
-                            <Col md={{ span: 6, offset: 3 }}>
-                                <img alt="cover" className="imgcover" src={`${Cover}`} onClick={this.handleReturn}/>
+                            <Col md={{ span: 8, offset: 2 }}>
+                                <Image src={`${Cover}`} fluid rounded onClick={this.handleReturn} style={{cursor:'pointer'}} />
                             </Col>
                         </Row>
                     </Container>
-                </section>
-                 <section id="sec2">
                     <Container fluid>
                         <Row>
                             <Col md={{ span: 6, offset: 3 }}>

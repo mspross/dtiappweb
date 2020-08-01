@@ -1,6 +1,6 @@
 //Headers Components
 import React, { Component } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Image } from 'react-bootstrap';
 import Footer from '../components/footer';
 import APIConf from '../components/apiconfig';
 import DestinosGrid from '../components/destinosgrid';
@@ -58,10 +58,10 @@ export default class cover extends Component {
         return (
             <div>
                 <section id="sec1">
-                    <Container fluid>
+                    <Container>
                         <Row>
-                            <Col md={{ span: 6, offset: 3 }}>
-                                <img alt="cover" className="imgcover" src={`${Cover}`} onClick={this.handleReturn}/>
+                            <Col md={{ span: 8, offset: 2 }}>
+                                <Image src={`${Cover}`} fluid rounded onClick={this.handleReturn} style={{cursor:'pointer'}} />
                             </Col>
                         </Row>
                     </Container>

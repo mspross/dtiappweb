@@ -8,6 +8,8 @@ import Subcover from '../components/subcover';
 import Notificacion from '../components/notificacion';
 // CSS style sheet
 import './css/style.css';
+//Images
+import Registro from '../images/Bot_ini_azul.png';
 //Object
 export default class login extends Component {
     //Constructor
@@ -185,7 +187,7 @@ export default class login extends Component {
                         options > 0 ? this.handleNotification(msgText, options) : ""
                     }
                     <section id="sec1">
-                        <Subcover handleCloseSession={this.handleCloseSession} />
+                        <Subcover handleCloseSession={this.handleCloseSession} image={Registro}/>
                     </section>
                     <br />
                     <section id="sec2">
@@ -255,7 +257,7 @@ export default class login extends Component {
                         options > 0 ? this.handleNotification(msgText, options) : ""
                     }
                     <section id="sec1">
-                        <Subcover handleCloseSession={this.handleCloseSession} />
+                        <Subcover handleCloseSession={this.handleCloseSession} image={Registro}/>
                     </section>
                     <br />
                     <section id="sec2">

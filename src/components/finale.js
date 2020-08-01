@@ -1,15 +1,15 @@
 //Headers Components
 import React, { Component } from 'react';
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
-import { MdDone, MdContactMail, MdComment, MdAccountCircle } from "react-icons/md";
+import { MdDone, MdContactMail, MdAccountCircle } from "react-icons/md";
 import APIConf from '../components/apiconfig';
 import Footer from '../components/footer';
 import Notificacion from '../components/notificacion';
 import Subcover from '../components/subcover';
 // CSS style sheet
-import './css/style.css';
+import '../pages/css/style.css';
 // Images
-import Contacto from '../images/Bot_ini_verde.png';
+import Cover from '../images/Dti_icontext.png';
 //Object
 export default class contacto extends Component {
     //Constructor
@@ -18,11 +18,12 @@ export default class contacto extends Component {
         this.state = {
             options: 0,
             linkhome: '/',
+            linkreturn: '/dti/orden',
             user: undefined,
             email: undefined,
-            comments: undefined,
             msgStatus: null,
-            msgText: null
+            msgText: null,
+            orderItem: this.props.order
         }
     }
     handleSubmit = async e => {
@@ -30,31 +31,33 @@ export default class contacto extends Component {
         this.setState({
             isLoading: true
         });
+        //Concat last data
+        let _order = this.state.user.concat('|').concat(this.state.email).concat('|').concat(this.state.orderItem);
         try{
-            let res = await APIConf.post('/comentarios/add', {
-                nombre: this.state.user,
-                correo: this.state.email,
-                comentario: this.state.comments
+            let res = await APIConf.post('/orders/add', {
+                orderID: this.state.user,
+                name: this.state.email,
+                order: _order
             });
             this.setState({
                 options: 2,
                 user: '',
                 email: '',
-                comments: '',    
                 msgStatus: res.data.status,
-                msgText: 'Gracias por su comentario.'
+                msgText: res.data.message
             });
+            setTimeout(this.handleClearForm, 2500);
         }catch(error){
             this.setState({
                 options: 1,
                 user: '',
                 email: '',
-                comments: '',    
                 msgText: 'Algo salio mal. Intente nuevamente, por favor.'
             });
         }
     }
     handleNotification = (_message, _options) => (<Notificacion message={_message} options={_options}/>);
+    handleClearForm = () => { window.location = this.state.linkhome };
     handleChange = e => {
         const target = e.target;
         const value = target.value;
@@ -64,9 +67,9 @@ export default class contacto extends Component {
             options: 0
         })
     }
-    handleCloseSession = e => {
+    handleReturn = e => {
         e.preventDefault();
-        window.location = this.state.linkhome;
+        window.location = this.state.linkreturn;
     }
     render(){
         const { msgText, options } = this.state;
@@ -76,14 +79,14 @@ export default class contacto extends Component {
                     options > 0 ? this.handleNotification(msgText, options) : ""
                 }
                 <section id="sec1">
-                    <Subcover handleCloseSession={this.handleCloseSession} image={Contacto}/>
+                    <Subcover handleCloseSession={null} image={Cover}/>
                 </section>
                 <br />
                 <section id="sec2">
                     <Container fluid>
                         <Row>
                             <Col md={{ span: 6, offset: 3 }}>
-                                <h2 className="subtitulo">Nos gustar&iacute;a conocer su opini&oacute;n</h2>
+                                <h2 className="subtitulo">Destinos Tur&iacute;sticos Inteligentes - Conclusi&oacute;n</h2>
                             </Col>
                         </Row>
                         <Row>
@@ -121,23 +124,8 @@ export default class contacto extends Component {
                                                     required/>
                                                 </Form.Group>
                                             </Form.Row>
-                                            <Form.Row>
-                                                <MdComment style={{height:'5%', width:'5%'}} />
-                                                <Form.Group as={Col} controlId="formBasicComments">
-                                                    <Form.Control 
-                                                    as="textarea"
-                                                    style={{fontSize: '1.1em'}}
-                                                    placeholder="Comentarios" 
-                                                    row="2"
-                                                    name="comments"
-                                                    onChange={this.handleChange} 
-                                                    value={this.state.comments} 
-                                                    autoComplete="off" 
-                                                    className="sombra" 
-                                                    required/>
-                                                </Form.Group>
-                                            </Form.Row>
-                                            <Button variant="outline-success" type="Submit" className="button" size="sm">Enviar&nbsp;&nbsp;<MdDone /></Button>
+                                            <Button variant="outline-secondary" className="buttonForm sombra" size="sm" onClick={this.handleReturn}>Cancelar&nbsp;&nbsp;<MdDone /></Button>
+                                            <Button variant="outline-success" type="Submit" className="buttonForm sombra" size="sm">Enviar&nbsp;&nbsp;<MdDone /></Button>
                                         </Form>
                                     </Card.Body>
                                 </Card>
@@ -153,4 +141,3 @@ export default class contacto extends Component {
         )
     }
 }
-

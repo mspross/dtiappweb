@@ -8,6 +8,8 @@ import Subcover from '../components/subcover';
 import Notificacion from '../components/notificacion';
 //Style Sheet
 import './css/style.css';
+//Imagees
+import Registro from '../images/Bot_ini_azul.png';
 //Class
 export default class nuevosnegocios extends Component {
     //Constructor
@@ -100,7 +102,7 @@ export default class nuevosnegocios extends Component {
         window.location = this.state.linkhome;
     }
     handleNotification = (_message, _options) => (<Notificacion message={_message} options={_options}/>);
-    handleClearForm = () => { window.location = this.state.linkrefresh }
+    handleClearForm = () => { window.location = this.state.linkrefresh };
     handleSubmit = async e => {
         e.preventDefault();
         this.setState({
@@ -180,7 +182,7 @@ export default class nuevosnegocios extends Component {
                     options > 0 ? this.handleNotification(msgText, options) : ""
                 }
                 <section id="sec1">
-                    <Subcover handleCloseSession={this.handleCloseSession} /> 
+                    <Subcover handleCloseSession={this.handleCloseSession} image={Registro} /> 
                 </section>
                 <br />
                 <section id="sec2">

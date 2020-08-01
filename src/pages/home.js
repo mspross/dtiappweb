@@ -1,6 +1,6 @@
 //Headers Components
 import React, { Component } from 'react';
-import { Container, Row, Col, Card, CardGroup } from 'react-bootstrap';
+import { Container, Row, Col, Image, Card, CardGroup } from 'react-bootstrap';
 import APIConf from '../components/apiconfig';
 import Footer from '../components/footer';
 import ModalM from '../components/modal'
@@ -139,15 +139,13 @@ export default class cover extends Component {
             return (
                 <div>
                 <section id="sec1">
-                    <Container fluid>
+                    <Container>
                         <Row>
-                            <Col md={{ span: 6, offset: 3 }}>
-                                <img alt="cover" className="imgcover" src={`${Cover}`}/>
+                            <Col md={{ span: 8, offset: 2 }}>
+                                <Image src={`${Cover}`} fluid rounded />
                             </Col>
                         </Row>
                     </Container>
-                </section>
-                 <section id="sec2">
                     <Container fluid>
                         <Row>
                             <Col md={{ span: 6, offset: 3 }}>

@@ -4,6 +4,7 @@ import APIConf from '../components/apiconfig';
 import Footer from '../components/footer';
 import Spinner from '../components/spinner';
 import DisplayErr from '../components/error';
+import Finale from '../components/finale';
 import Dti from '../images/Dti_icontext.png';
 //Style sheet
 import './css/grid.css';
@@ -14,6 +15,7 @@ export default class Orden extends Component {
         this.state = {
             isLoading: true,
             isError: false,
+            isModal: false,
             routelink: '/dti/detalles',
             routehome: '/',
             ItemsRutas: null,
@@ -23,13 +25,14 @@ export default class Orden extends Component {
             ItemsCultura: null,
             ItemsFerias: null,
             ItemsArtesanias: null,
+            orderItem: null,
             rutas: sessionStorage.getItem("Ruta"),
             destinos: sessionStorage.getItem("Destino"),
             hospedaje: sessionStorage.getItem("Hospedaje") || 'empty',
             gastronomia: sessionStorage.getItem("Gastronomia") || 'empty',
             culturarecreacion: sessionStorage.getItem("Cultura-Recreacion") || 'empty',
             feriaseventos: sessionStorage.getItem("Ferias-Eventos") || 'empty',
-            artesanias: sessionStorage.getItem("Artesanias") || 'empty'
+            artesanias: sessionStorage.getItem("Artesanias") || 'empty',
         }
     }
     //Functions
@@ -79,19 +82,41 @@ export default class Orden extends Component {
     }
     handleReservar = e => {
         e.preventDefault();
-        alert("Destino Turistico Reservado!!");
-        window.location = this.state.routehome;
+        if(this.state.hospedaje !== 'empty' || this.state.gastronomia !== 'empty' || this.state.artesanias !== 'empty' || this.state.culturarecreacion !== 'empty' || this.state.feriaseventos !== 'empty'){
+            let _order = this.state.rutas.concat('|').concat(this.state.destinos).concat('|').concat(this.state.hospedaje).concat('|').concat(this.state.gastronomia).concat('|').concat(this.state.artesanias).concat('|').concat(this.state.culturarecreacion).concat('|').concat(this.state.feriaseventos);
+            this.setState({
+                isLoading: false,
+                isError: false,
+                isModal: true,
+                orderItem: _order
+            });
+        }else{
+            this.setState({
+                isLoading: false,
+                isError: true,
+                msgStatus: "404",
+                msgText: "Seleccione al menos un negocio para continuar"
+            });
+        }
     }
     handleCloseAlert = () => {
         this.setState({
             isError: false,
             isLoading:false
         });
+        window.location = this.state.routelink;
+    }
+    handleCloseAll = () => {
+        this.setState({
+            isError: false,
+            isLoading: false,
+            isModal: false
+        });
         window.location = this.state.routehome;
     }
     //Render
     render(){
-        const {isLoading, isError, msgText, msgStatus, ItemsRutas, ItemsDestino, ItemsHospedaje, ItemsGastro, ItemsCultura, ItemsFerias, ItemsArtesanias } = this.state;
+        const {isLoading, isError, msgText, msgStatus, ItemsRutas, ItemsDestino, ItemsHospedaje, ItemsGastro, ItemsCultura, ItemsFerias, ItemsArtesanias, isModal, orderItem } = this.state;
         if(isLoading){
             return(
                 <Spinner />
@@ -99,6 +124,10 @@ export default class Orden extends Component {
         }else if(isError){
             return(
                 <DisplayErr status={msgStatus} message={msgText} handleCloseAlert={this.handleCloseAlert} />
+            )
+        }else if(isModal){
+            return(
+                <Finale handleCloseAll={this.handleCloseAll} order={orderItem}/>
             )
         }else{
             const images = require.context('../images', true);

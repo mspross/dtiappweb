@@ -6,8 +6,10 @@ import APIConf from '../components/apiconfig';
 import Footer from '../components/footer';
 import Subcover from '../components/subcover';
 import Notificacion from '../components/notificacion';
+import AvisoPriv from '../components/avisopriv';
 //Style Sheet
 import './css/style.css';
+import './css/aviso.css';
 //Imagees
 import Registro from '../images/Bot_ini_azul.png';
 //Class
@@ -21,6 +23,7 @@ export default class nuevosnegocios extends Component {
             isError: false,
             ischeckinout: false,
             isopenclose: false,
+            isPrivacy: false,
             msgStatus: null,
             msgText: null,
             travelItem: null,
@@ -172,284 +175,305 @@ export default class nuevosnegocios extends Component {
             }
         }
     }
+    handleAviso = () => {
+        this.setState({
+            isPrivacy: true
+        });
+    }
+    handleCloseAviso = e => {
+        this.setState({
+            isPrivacy: false
+        });
+    }
     //Render
     render(){
-        const { options, msgText, ischeckinout, isopenclose, travelItem } = this.state;
+        const { isPrivacy, options, msgText, ischeckinout, isopenclose, travelItem } = this.state;
         let opciones = travelItem === null ? (<option value="-1" id="9">Destinos no disponibles</option>) : (travelItem.map(item => <option value={item._id} id={item._id}>{item.dti_name}</option>));
-        return(
-            <div>
-                {
-                    options > 0 ? this.handleNotification(msgText, options) : ""
-                }
-                <section id="sec1">
-                    <Subcover handleCloseSession={this.handleCloseSession} image={Registro} /> 
-                </section>
-                <br />
-                <section id="sec2">
-                    <Container fluid>
-                        <Row>
-                            <Col md={{ span: 6, offset: 4 }}>
-                                <h2 className="subtitulo">Nuevo Registro</h2>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col md={{ span: 6, offset: 3 }}>
-                                <Card className="sombra relleno">
-                                    <Card.Body>
-                                        <Form name="frmRegistro" encType="multipart/form-data" onSubmit={this.handleSubmit}>
-                                            <Form.Row>
-                                                <Form.Group as={Col} controlId="formBasicPart1">
-                                                    <Form.Label style={{fontSize: '1.3em'}}>Nombre Negocio</Form.Label>
-                                                    <Form.Control 
-                                                    type="text"
-                                                    placeholder="Nombre" 
-                                                    maxLength="100" 
-                                                    name="name" 
-                                                    onChange={this.handleChange} 
-                                                    value={this.state.name} 
-                                                    autoComplete="off"
-                                                    className="sombra"
-                                                    required/>
-                                                </Form.Group>
-                                                <Form.Group as={Col} controlId="formBasicPart2">
-                                                    <Form.Label style={{fontSize: '1.3em'}}>Direcci&oacute;n Negocio</Form.Label>
-                                                    <Form.Control 
-                                                    type="text"
-                                                    placeholder="Direcci&oacute;n" 
-                                                    maxLength="100" 
-                                                    name="address" 
-                                                    onChange={this.handleChange} 
-                                                    value={this.state.address} 
-                                                    autoComplete="off"
-                                                    className="sombra" 
-                                                    required/>
-                                                </Form.Group>
-                                                <Form.Group as={Col} controlId="formBasicPart3">
-                                                    <Form.Label style={{fontSize: '1.3em'}}>Correo Negocio</Form.Label>
-                                                    <Form.Control 
-                                                    type="email"
-                                                    placeholder="nombre@dominio.com" 
-                                                    maxLength="100" 
-                                                    name="email" 
-                                                    onChange={this.handleChange} 
-                                                    value={this.state.email} 
-                                                    autoComplete="off"
-                                                    className="sombra" 
-                                                    required/>
-                                                </Form.Group>
-                                            </Form.Row>
-                                            <Form.Row>
-                                                <Form.Group as={Col} controlId="formBasicPart4">
-                                                    <Form.Label style={{fontSize: '1.3em'}}>Descripci&oacute;n Negocio</Form.Label>
-                                                    <Form.Control 
-                                                    as="textarea"
-                                                    rows= "2"
-                                                    placeholder="Descripci&oacute;n breve" 
-                                                    name="description" 
-                                                    onChange={this.handleChange} 
-                                                    value={this.state.description} 
-                                                    autoComplete="off"
-                                                    className="sombra"
-                                                    style={{fontSize:'1.3em'}} 
-                                                    required/>
-                                                </Form.Group>
-                                            </Form.Row>
-                                            <Form.Row>
-                                                <Form.Group as={Col} controlId="formBasicPart5">
-                                                    <Form.Label style={{fontSize: '1.3em'}}>Tel&eacute;fono Negocio</Form.Label>
-                                                    <Form.Control 
-                                                    type="text"
-                                                    placeholder="xxx-xxx-xxx" 
-                                                    name="phone" 
-                                                    onChange={this.handleChange} 
-                                                    value={this.state.phone} 
-                                                    autoComplete="off"
-                                                    className="sombra" 
-                                                    required/>
-                                                </Form.Group>
-                                                <Form.Group as={Col} controlId="formBasicPart6">
-                                                    <Form.Label style={{fontSize: '1.3em'}}>Tipo Negocio</Form.Label>
-                                                    <Form.Control 
-                                                    as="select"
-                                                    name="typeOfBusiness" 
-                                                    onChange={this.handleChangeCombo} 
-                                                    autoComplete="off"
-                                                    className="sombra"
-                                                    style={{fontSize: '1.3em'}} 
-                                                    required>
-                                                        <option value="0" id="0">--- Seleccione opci&oacute;n ---</option>
-                                                        <option value="Hospedaje" id="1">Hospedaje</option>
-                                                        <option value="Gastronomia" id="2">Gastronom&iacute;a</option>
-                                                        <option value="Cultura-Recreacion" id="3">Cultura Recreaci&oacute;n</option>
-                                                        <option value="Ferias-Eventos" id="4">Ferias Eventos</option>
-                                                        <option value="Artesanias" id="5">Artesanias</option>
-                                                    </Form.Control>
-                                                </Form.Group>
-                                            </Form.Row>
-                                            <Form.Row>
-                                                <Form.Group as={Col} controlId="formBasicPart7">
-                                                    <Form.Label style={{fontSize: '1.3em'}}>Imagen Negocio</Form.Label>
-                                                    <Form.Control 
-                                                    type="file"
-                                                    accept="image/*"
-                                                    name="file" 
-                                                    onChange={this.handleListFile} 
-                                                    autoComplete="off"
-                                                    className="sombra" 
-                                                    required/>
-                                                </Form.Group>
-                                            </Form.Row>
-                                            <Form.Row>
-                                                <Form.Group as={Col} controlId="formBasicPart8">
-                                                    <Form.Label style={{fontSize: '1.3em'}}>Entrada - Salida</Form.Label>
-                                                    {ischeckinout ? (
+        if(isPrivacy){
+            return(
+                <AvisoPriv handleClose={this.handleCloseAviso}/>
+            )
+        }else{
+            return(
+                <div>
+                    {
+                        options > 0 ? this.handleNotification(msgText, options) : ""
+                    }
+                    <section id="sec1">
+                        <Subcover handleCloseSession={this.handleCloseSession} image={Registro} /> 
+                    </section>
+                    <br />
+                    <section id="sec2">
+                        <Container fluid>
+                            <Row>
+                                <Col md={{ span: 6, offset: 4 }}>
+                                    <h2 className="subtitulo">Nuevo Registro</h2>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col md={{ span: 6, offset: 3 }}>
+                                    <Card className="sombra relleno">
+                                        <Card.Body>
+                                            <Form name="frmRegistro" encType="multipart/form-data" onSubmit={this.handleSubmit}>
+                                                <Form.Row>
+                                                    <Form.Group as={Col} controlId="formBasicPart1">
+                                                        <Form.Label style={{fontSize: '1.3em'}}>Nombre Negocio</Form.Label>
                                                         <Form.Control 
                                                         type="text"
-                                                        placeholder="##:## - ##:##" 
-                                                        name="checkinout" 
+                                                        placeholder="Nombre" 
+                                                        maxLength="100" 
+                                                        name="name" 
                                                         onChange={this.handleChange} 
-                                                        value={this.state.checkinout} 
+                                                        value={this.state.name} 
                                                         autoComplete="off"
                                                         className="sombra"
                                                         required/>
-                                                        ) : (
+                                                    </Form.Group>
+                                                    <Form.Group as={Col} controlId="formBasicPart2">
+                                                        <Form.Label style={{fontSize: '1.3em'}}>Direcci&oacute;n Negocio</Form.Label>
                                                         <Form.Control 
                                                         type="text"
-                                                        placeholder="##:## - ##:##" 
-                                                        name="checkinout" 
+                                                        placeholder="Direcci&oacute;n" 
+                                                        maxLength="100" 
+                                                        name="address" 
                                                         onChange={this.handleChange} 
-                                                        value={this.state.checkinout} 
+                                                        value={this.state.address} 
                                                         autoComplete="off"
-                                                        className="sombra"
-                                                        disabled/>
-                                                    )}
-                                                </Form.Group>
-                                                <Form.Group as={Col} controlId="formBasicPart9">
-                                                    <Form.Label style={{fontSize: '1.3em'}}>Abierto - Cerrado</Form.Label>
-                                                    {isopenclose ? (
-                                                        <Form.Control 
-                                                        type="text"
-                                                        placeholder="##:## - ##:##" 
-                                                        name="openclose" 
-                                                        onChange={this.handleChange} 
-                                                        value={this.state.openclose} 
-                                                        autoComplete="off"
-                                                        className="sombra"
+                                                        className="sombra" 
                                                         required/>
-                                                        ) : (
+                                                    </Form.Group>
+                                                    <Form.Group as={Col} controlId="formBasicPart3">
+                                                        <Form.Label style={{fontSize: '1.3em'}}>Correo Negocio</Form.Label>
                                                         <Form.Control 
-                                                        type="text"
-                                                        placeholder="##:## - ##:##" 
-                                                        name="openclose" 
+                                                        type="email"
+                                                        placeholder="nombre@dominio.com" 
+                                                        maxLength="100" 
+                                                        name="email" 
                                                         onChange={this.handleChange} 
-                                                        value={this.state.openclose} 
+                                                        value={this.state.email} 
+                                                        autoComplete="off"
+                                                        className="sombra" 
+                                                        required/>
+                                                    </Form.Group>
+                                                </Form.Row>
+                                                <Form.Row>
+                                                    <Form.Group as={Col} controlId="formBasicPart4">
+                                                        <Form.Label style={{fontSize: '1.3em'}}>Descripci&oacute;n Negocio</Form.Label>
+                                                        <Form.Control 
+                                                        as="textarea"
+                                                        rows= "2"
+                                                        placeholder="Descripci&oacute;n breve" 
+                                                        name="description" 
+                                                        onChange={this.handleChange} 
+                                                        value={this.state.description} 
                                                         autoComplete="off"
                                                         className="sombra"
-                                                        disabled/>
-                                                    )}
-                                                </Form.Group>
-                                                <Form.Group as={Col} controlId="formBasicPart10">
-                                                    <Form.Label style={{fontSize: '1.3em'}}>Precio</Form.Label>
-                                                    <Form.Control 
-                                                    type="text"
-                                                    maxLength="5"
-                                                    placeholder="$" 
-                                                    name="pricelevel" 
-                                                    onChange={this.handleChange} 
-                                                    value={this.state.pricelevel} 
-                                                    autoComplete="off"
-                                                    className="sombra" 
-                                                    required/>
-                                                </Form.Group>
-                                            </Form.Row>
-                                            <Form.Row>
-                                                <Form.Group as={Col} controlId="formBasicPart10">
-                                                    <Form.Label style={{fontSize: '1.3em'}}>Anexo 1</Form.Label>
-                                                    <Form.Control 
-                                                    type="text"
-                                                    maxLength="100"
-                                                    name="item1" 
-                                                    onChange={this.handleChange} 
-                                                    value={this.state.item1} 
-                                                    autoComplete="off"
-                                                    className="sombra"/>
-                                                </Form.Group>
-                                                <Form.Group as={Col} controlId="formBasicPart10">
-                                                    <Form.Label style={{fontSize: '1.3em'}}>Anexo 2</Form.Label>
-                                                    <Form.Control 
-                                                    type="text"
-                                                    maxLength="100"
-                                                    name="item2" 
-                                                    onChange={this.handleChange} 
-                                                    value={this.state.item2} 
-                                                    autoComplete="off"
-                                                    className="sombra"/>
-                                                </Form.Group>
-                                                <Form.Group as={Col} controlId="formBasicPart10">
-                                                    <Form.Label style={{fontSize: '1.3em'}}>Anexo 3</Form.Label>
-                                                    <Form.Control 
-                                                    type="text"
-                                                    maxLength="100"
-                                                    name="item3" 
-                                                    onChange={this.handleChange} 
-                                                    value={this.state.item3} 
-                                                    autoComplete="off"
-                                                    className="sombra"/>
-                                                </Form.Group>
-                                            </Form.Row>
-                                            <Form.Row>
-                                                <Form.Group as={Col} controlId="formBasicPart11">
-                                                    <Form.Label style={{fontSize: '1.3em'}}>Anexo 4</Form.Label>
-                                                    <Form.Control 
-                                                    type="text"
-                                                    maxLength="100"
-                                                    name="item4" 
-                                                    onChange={this.handleChange} 
-                                                    value={this.state.item4} 
-                                                    autoComplete="off"
-                                                    className="sombra"/>
-                                                </Form.Group>
-                                                <Form.Group as={Col} controlId="formBasicPart11">
-                                                    <Form.Label style={{fontSize: '1.3em'}}>Anexo 5</Form.Label>
-                                                    <Form.Control 
-                                                    type="text"
-                                                    maxLength="100"
-                                                    name="item5" 
-                                                    onChange={this.handleChange} 
-                                                    value={this.state.item5} 
-                                                    autoComplete="off"
-                                                    className="sombra"/>
-                                                </Form.Group>
-                                            </Form.Row>
-                                            <Form.Row>
-                                                <Form.Group as={Col} controlId="formBasicPart11">
-                                                    <Form.Label style={{fontSize: '1.3em'}}>Destinos</Form.Label>
-                                                    <Form.Control 
-                                                    as="select"
-                                                    name="travelID" 
-                                                    onChange={this.handleChange} 
-                                                    autoComplete="off"
-                                                    className="sombra"
-                                                    style={{fontSize: '1.3em'}} 
-                                                    required>
-                                                    <option value="0" id="0">--- Seleccione Destino ---</option>
-                                                    { opciones }
-                                                    </Form.Control>
-                                                </Form.Group>
-                                            </Form.Row>
-                                            <Button variant="outline-success" type="Submit" className="button" size="sm">Registrar</Button>
-                                        </Form>
-                                    </Card.Body>
-                                </Card>
-                            </Col>
-                        </Row>
-                    </Container>
-                </section>
-                <br />
-                <section id="sec9">
-                    <Footer/>
-                </section>
-            </div>
-        )
+                                                        style={{fontSize:'1.3em'}} 
+                                                        required/>
+                                                    </Form.Group>
+                                                </Form.Row>
+                                                <Form.Row>
+                                                    <Form.Group as={Col} controlId="formBasicPart5">
+                                                        <Form.Label style={{fontSize: '1.3em'}}>Tel&eacute;fono Negocio</Form.Label>
+                                                        <Form.Control 
+                                                        type="text"
+                                                        placeholder="xxx-xxx-xxx" 
+                                                        name="phone" 
+                                                        onChange={this.handleChange} 
+                                                        value={this.state.phone} 
+                                                        autoComplete="off"
+                                                        className="sombra" 
+                                                        required/>
+                                                    </Form.Group>
+                                                    <Form.Group as={Col} controlId="formBasicPart6">
+                                                        <Form.Label style={{fontSize: '1.3em'}}>Tipo Negocio</Form.Label>
+                                                        <Form.Control 
+                                                        as="select"
+                                                        name="typeOfBusiness" 
+                                                        onChange={this.handleChangeCombo} 
+                                                        autoComplete="off"
+                                                        className="sombra"
+                                                        style={{fontSize: '1.3em'}} 
+                                                        required>
+                                                            <option value="0" id="0">--- Seleccione opci&oacute;n ---</option>
+                                                            <option value="Hospedaje" id="1">Hospedaje</option>
+                                                            <option value="Gastronomia" id="2">Gastronom&iacute;a</option>
+                                                            <option value="Cultura-Recreacion" id="3">Cultura Recreaci&oacute;n</option>
+                                                            <option value="Ferias-Eventos" id="4">Ferias Eventos</option>
+                                                            <option value="Artesanias" id="5">Artesanias</option>
+                                                        </Form.Control>
+                                                    </Form.Group>
+                                                </Form.Row>
+                                                <Form.Row>
+                                                    <Form.Group as={Col} controlId="formBasicPart7">
+                                                        <Form.Label style={{fontSize: '1.3em'}}>Imagen Negocio</Form.Label>
+                                                        <Form.Control 
+                                                        type="file"
+                                                        accept="image/*"
+                                                        name="file" 
+                                                        onChange={this.handleListFile} 
+                                                        autoComplete="off"
+                                                        className="sombra" 
+                                                        required/>
+                                                    </Form.Group>
+                                                </Form.Row>
+                                                <Form.Row>
+                                                    <Form.Group as={Col} controlId="formBasicPart8">
+                                                        <Form.Label style={{fontSize: '1.3em'}}>Entrada - Salida</Form.Label>
+                                                        {ischeckinout ? (
+                                                            <Form.Control 
+                                                            type="text"
+                                                            placeholder="##:## - ##:##" 
+                                                            name="checkinout" 
+                                                            onChange={this.handleChange} 
+                                                            value={this.state.checkinout} 
+                                                            autoComplete="off"
+                                                            className="sombra"
+                                                            required/>
+                                                            ) : (
+                                                            <Form.Control 
+                                                            type="text"
+                                                            placeholder="##:## - ##:##" 
+                                                            name="checkinout" 
+                                                            onChange={this.handleChange} 
+                                                            value={this.state.checkinout} 
+                                                            autoComplete="off"
+                                                            className="sombra"
+                                                            disabled/>
+                                                        )}
+                                                    </Form.Group>
+                                                    <Form.Group as={Col} controlId="formBasicPart9">
+                                                        <Form.Label style={{fontSize: '1.3em'}}>Abierto - Cerrado</Form.Label>
+                                                        {isopenclose ? (
+                                                            <Form.Control 
+                                                            type="text"
+                                                            placeholder="##:## - ##:##" 
+                                                            name="openclose" 
+                                                            onChange={this.handleChange} 
+                                                            value={this.state.openclose} 
+                                                            autoComplete="off"
+                                                            className="sombra"
+                                                            required/>
+                                                            ) : (
+                                                            <Form.Control 
+                                                            type="text"
+                                                            placeholder="##:## - ##:##" 
+                                                            name="openclose" 
+                                                            onChange={this.handleChange} 
+                                                            value={this.state.openclose} 
+                                                            autoComplete="off"
+                                                            className="sombra"
+                                                            disabled/>
+                                                        )}
+                                                    </Form.Group>
+                                                    <Form.Group as={Col} controlId="formBasicPart10">
+                                                        <Form.Label style={{fontSize: '1.3em'}}>Precio</Form.Label>
+                                                        <Form.Control 
+                                                        type="text"
+                                                        maxLength="5"
+                                                        placeholder="$" 
+                                                        name="pricelevel" 
+                                                        onChange={this.handleChange} 
+                                                        value={this.state.pricelevel} 
+                                                        autoComplete="off"
+                                                        className="sombra" 
+                                                        required/>
+                                                    </Form.Group>
+                                                </Form.Row>
+                                                <Form.Row>
+                                                    <Form.Group as={Col} controlId="formBasicPart10">
+                                                        <Form.Label style={{fontSize: '1.3em'}}>Anexo 1</Form.Label>
+                                                        <Form.Control 
+                                                        type="text"
+                                                        maxLength="100"
+                                                        name="item1" 
+                                                        onChange={this.handleChange} 
+                                                        value={this.state.item1} 
+                                                        autoComplete="off"
+                                                        className="sombra"/>
+                                                    </Form.Group>
+                                                    <Form.Group as={Col} controlId="formBasicPart10">
+                                                        <Form.Label style={{fontSize: '1.3em'}}>Anexo 2</Form.Label>
+                                                        <Form.Control 
+                                                        type="text"
+                                                        maxLength="100"
+                                                        name="item2" 
+                                                        onChange={this.handleChange} 
+                                                        value={this.state.item2} 
+                                                        autoComplete="off"
+                                                        className="sombra"/>
+                                                    </Form.Group>
+                                                    <Form.Group as={Col} controlId="formBasicPart10">
+                                                        <Form.Label style={{fontSize: '1.3em'}}>Anexo 3</Form.Label>
+                                                        <Form.Control 
+                                                        type="text"
+                                                        maxLength="100"
+                                                        name="item3" 
+                                                        onChange={this.handleChange} 
+                                                        value={this.state.item3} 
+                                                        autoComplete="off"
+                                                        className="sombra"/>
+                                                    </Form.Group>
+                                                </Form.Row>
+                                                <Form.Row>
+                                                    <Form.Group as={Col} controlId="formBasicPart11">
+                                                        <Form.Label style={{fontSize: '1.3em'}}>Anexo 4</Form.Label>
+                                                        <Form.Control 
+                                                        type="text"
+                                                        maxLength="100"
+                                                        name="item4" 
+                                                        onChange={this.handleChange} 
+                                                        value={this.state.item4} 
+                                                        autoComplete="off"
+                                                        className="sombra"/>
+                                                    </Form.Group>
+                                                    <Form.Group as={Col} controlId="formBasicPart11">
+                                                        <Form.Label style={{fontSize: '1.3em'}}>Anexo 5</Form.Label>
+                                                        <Form.Control 
+                                                        type="text"
+                                                        maxLength="100"
+                                                        name="item5" 
+                                                        onChange={this.handleChange} 
+                                                        value={this.state.item5} 
+                                                        autoComplete="off"
+                                                        className="sombra"/>
+                                                    </Form.Group>
+                                                </Form.Row>
+                                                <Form.Row>
+                                                    <Form.Group as={Col} controlId="formBasicPart11">
+                                                        <Form.Label style={{fontSize: '1.3em'}}>Destinos</Form.Label>
+                                                        <Form.Control 
+                                                        as="select"
+                                                        name="travelID" 
+                                                        onChange={this.handleChange} 
+                                                        autoComplete="off"
+                                                        className="sombra"
+                                                        style={{fontSize: '1.3em'}} 
+                                                        required>
+                                                        <option value="0" id="0">--- Seleccione Destino ---</option>
+                                                        { opciones }
+                                                        </Form.Control>
+                                                    </Form.Group>
+                                                </Form.Row>
+                                                <Button variant="outline-success" type="Submit" className="button" size="sm">Registrar</Button>
+                                            </Form>
+                                        </Card.Body>
+                                    </Card>
+                                </Col>
+                            </Row>
+                        </Container>
+                    </section>
+                    <br />
+                    <section id="sec9">
+                        <Footer/>
+                    </section>
+                    <section id="6">
+                        <span className="footer" style={{cursor:'pointer'}} onClick={this.handleAviso}>
+                            Consulte nuestro&nbsp;<strong>aviso de privacidad</strong>
+                        </span>
+                    </section>
+                </div>
+            )
+        }
     }
 }

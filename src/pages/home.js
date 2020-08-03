@@ -3,9 +3,12 @@ import React, { Component } from 'react';
 import { Container, Row, Col, Image, Card, CardGroup } from 'react-bootstrap';
 import APIConf from '../components/apiconfig';
 import Footer from '../components/footer';
-import ModalM from '../components/modal'
+import ModalM from '../components/modal';
+import AvisoPriv from '../components/avisopriv';
 // CSS style sheet
 import './css/style.css';
+import './css/aviso.css';
+
 // Images
 import Cover from '../images/D.t.i._Hidalgo2.png';
 import Dti from '../images/Dti_icontext.png';
@@ -24,6 +27,7 @@ export default class cover extends Component {
             isLoading: false,
             isError: false,
             isCommit: false,
+            isPrivacy: false,
             link: '/dti',
             linkcontacto: '',
             dtiMessage: '',
@@ -52,6 +56,16 @@ export default class cover extends Component {
     handleRoutes = e => {
         e.preventDefault();
         window.location = "/dti/rutas";
+    }
+    handleAviso = () => {
+        this.setState({
+            isPrivacy: true
+        });
+    }
+    handleCloseAviso = e => {
+        this.setState({
+            isPrivacy: false
+        });
     }
     handleSubmit = async e => {
         e.preventDefault();
@@ -128,12 +142,16 @@ export default class cover extends Component {
     //Render
     render() {
         //JSX Code
-        const { isModal, options, dtiMessage, image } = this.state;
+        const { isPrivacy, isModal, options, dtiMessage, image } = this.state;
         if(isModal){
             return(
                 <div>
                     <ModalM show={isModal} onHide={this.handleModalClose} options={options} title={this.state.title} message={dtiMessage} image={image} handleModalClose={this.handleModalClose} />
                 </div>
+            )
+        }else if(isPrivacy){
+            return(
+                <AvisoPriv handleClose={this.handleCloseAviso}/>
             )
         }else{
             return (
@@ -182,6 +200,11 @@ export default class cover extends Component {
                 <br />
                 <section id="sec5">
                     <Footer />
+                </section>
+                <section id="6">
+                    <span className="footer" style={{cursor:'pointer'}} onClick={this.handleAviso}>
+                        Consulte nuestro&nbsp;<strong>aviso de privacidad</strong>
+                    </span>
                 </section>
                 </div>
             )

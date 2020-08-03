@@ -4,9 +4,11 @@ import { Container, Row, Col, Image } from 'react-bootstrap';
 import Footer from '../components/footer';
 import APIConf from '../components/apiconfig';
 import DestinosGrid from '../components/destinosgrid';
+import AvisoPriv from '../components/avisopriv';
 // CSS style sheet
 import './css/style.css';
 import './css/cards.css';
+import './css/aviso.css';
 // Images
 import Cover from '../images/Pantalla_Destinos.png';
 //Object
@@ -17,6 +19,7 @@ export default class cover extends Component {
         this.state = {
             routelink: '/dti/rutas',
             Items: null,
+            isPrivacy: false,
             routeID: sessionStorage.getItem("Ruta"),
             status: 1
         }
@@ -51,27 +54,48 @@ export default class cover extends Component {
             options: 0
         });
     }
+    handleAviso = () => {
+        this.setState({
+            isPrivacy: true
+        });
+    }
+    handleCloseAviso = e => {
+        this.setState({
+            isPrivacy: false
+        });
+    }
     //Render
     render() {
         //JSX Code
-        const { isLoading, Items } = this.state;
-        return (
-            <div>
-                <section id="sec1">
-                    <Container>
-                        <Row>
-                            <Col md={{ span: 8, offset: 2 }}>
-                                <Image src={`${Cover}`} fluid rounded onClick={this.handleReturn} style={{cursor:'pointer'}} />
-                            </Col>
-                        </Row>
-                    </Container>
-                </section>
-                <DestinosGrid items={Items} isLoading={isLoading} />
-                <br />
-                <section id="sec5">
-                    <Footer />
-                </section>
-            </div>
-        )
+        const { isPrivacy, isLoading, Items } = this.state;
+        if(isPrivacy){
+            return(
+                <AvisoPriv handleClose={this.handleCloseAviso}/>
+            )
+        }else{
+            return (
+                <div>
+                    <section id="sec1">
+                        <Container>
+                            <Row>
+                                <Col md={{ span: 8, offset: 2 }}>
+                                    <Image src={`${Cover}`} fluid rounded onClick={this.handleReturn} style={{cursor:'pointer'}} />
+                                </Col>
+                            </Row>
+                        </Container>
+                    </section>
+                    <DestinosGrid items={Items} isLoading={isLoading} />
+                    <br />
+                    <section id="sec5">
+                        <Footer />
+                    </section>
+                    <section id="6">
+                        <span className="footer" style={{cursor:'pointer'}} onClick={this.handleAviso}>
+                            Consulte nuestro&nbsp;<strong>aviso de privacidad</strong>
+                        </span>
+                    </section>
+                </div>
+            )
+        }
     }
 }

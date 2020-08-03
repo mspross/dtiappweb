@@ -116,7 +116,7 @@ export default class Orden extends Component {
     }
     //Render
     render(){
-        const {isLoading, isError, msgText, msgStatus, ItemsRutas, ItemsDestino, ItemsHospedaje, ItemsGastro, ItemsCultura, ItemsFerias, ItemsArtesanias, isModal, orderItem } = this.state;
+        const { isLoading, isError, msgText, msgStatus, ItemsRutas, ItemsDestino, ItemsHospedaje, ItemsGastro, ItemsCultura, ItemsFerias, ItemsArtesanias, isModal, orderItem } = this.state;
         if(isLoading){
             return(
                 <Spinner />

@@ -3,8 +3,10 @@ import React, { Component } from 'react';
 import { Container, Row, Col, Card, CardGroup, Button } from 'react-bootstrap';
 import Footer from '../components/footer';
 import Preorden from './preorden';
+import AvisoPriv from '../components/avisopriv';
 // CSS style sheet
 import './css/style.css';
+import './css/aviso.css';
 // Images
 import Cover from '../images/Negocios.jpg';
 import Negocio1 from '../images/Hoteles1.png';
@@ -20,6 +22,7 @@ export default class detalles extends Component {
         super(props);
         this.state = {
             isModal: false,
+            isPrivacy: false,
             routelink: '/dti/destinos',
             routePrev: '/dti/orden',
             image: '',
@@ -52,11 +55,25 @@ export default class detalles extends Component {
         e.preventDefault();
         window.location = this.state.routePrev;
     }
+    handleAviso = () => {
+        this.setState({
+            isPrivacy: true
+        });
+    }
+    handleCloseAviso = e => {
+        this.setState({
+            isPrivacy: false
+        });
+    }
     //Render
     render() {
         //JSX Code
-        const { isModal, image, type, travel } = this.state;
-        if(isModal){
+        const { isPrivacy, isModal, image, type, travel } = this.state;
+        if(isPrivacy){
+            return(
+                <AvisoPriv handleClose={this.handleCloseAviso}/>
+            )
+        }else if(isModal){
             return(
                 <div>
                     <Preorden image={image} typeOfBusiness={type} travelID={travel} handleModalClose={this.handleModalClose}/>
@@ -116,6 +133,11 @@ export default class detalles extends Component {
                 <br />
                 <section id="sec5">
                     <Footer />
+                </section>
+                <section id="6">
+                    <span className="footer" style={{cursor:'pointer'}} onClick={this.handleAviso}>
+                        Consulte nuestro&nbsp;<strong>aviso de privacidad</strong>
+                    </span>
                 </section>
                 </div>
             )

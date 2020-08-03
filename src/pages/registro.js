@@ -6,8 +6,10 @@ import APIConf from '../components/apiconfig';
 import Footer from '../components/footer';
 import Subcover from '../components/subcover';
 import Notificacion from '../components/notificacion';
+import AvisoPriv from '../components/avisopriv';
 // CSS style sheet
 import './css/style.css';
+import './css/aviso.css';
 //Images
 import Registro from '../images/Bot_ini_azul.png';
 //Object
@@ -27,7 +29,8 @@ export default class login extends Component {
             level: 1,
             msgStatus: null,
             msgText: null,
-            flag: false
+            flag: false,
+            isPrivacy: false
         }
     }
     handleSubmitRegistro = async e => {
@@ -177,10 +180,24 @@ export default class login extends Component {
         });
     }
     handleNotification = (_message, _options) => (<Notificacion message={_message} options={_options}/>);
+    handleAviso = () => {
+        this.setState({
+            isPrivacy: true
+        });
+    }
+    handleCloseAviso = e => {
+        this.setState({
+            isPrivacy: false
+        });
+    }
     //Render
     render(){
-        const { msgText, flag, options } = this.state;
-        if(!flag){
+        const { isPrivacy, msgText, flag, options } = this.state;
+        if(isPrivacy){
+            return(
+                <AvisoPriv handleClose={this.handleCloseAviso}/>
+            )
+        }else if(!flag){
             return(
                 <div>
                     {
@@ -247,6 +264,11 @@ export default class login extends Component {
                     <br />
                     <section id="sec3">
                         <Footer />
+                    </section>
+                    <section id="6">
+                        <span className="footer" style={{cursor:'pointer'}} onClick={this.handleAviso}>
+                            Consulte nuestro&nbsp;<strong>aviso de privacidad</strong>
+                        </span>
                     </section>
                 </div>
             )
@@ -342,6 +364,11 @@ export default class login extends Component {
                     <br/>
                     <section id="sec3">
                         <Footer />
+                    </section>
+                    <section id="6">
+                        <span className="footer" style={{cursor:'pointer'}} onClick={this.handleAviso}>
+                            Consulte nuestro&nbsp;<strong>aviso de privacidad</strong>
+                        </span>
                     </section>
                 </div>
             )

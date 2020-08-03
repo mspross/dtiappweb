@@ -3,8 +3,10 @@ import React, { Component } from 'react';
 import { Container, Row, Col, Image, Card, CardGroup } from 'react-bootstrap';
 import Footer from '../components/footer';
 import ModalM from '../components/modal';
+import AvisoPriv from '../components/avisopriv';
 // CSS style sheet
 import './css/style.css';
+import './css/aviso.css';
 // Images
 import Cover from '../images/Pantalla_Rutas2.png';
 import Ruta1 from '../images/Ruta_01.png';
@@ -24,6 +26,7 @@ export default class cover extends Component {
         super(props);
         this.state = {
             isModal: false,
+            isPrivacy: false,
             routelink: '/',
             nextImage: '/dti/destinos',
             title: '',
@@ -41,6 +44,7 @@ export default class cover extends Component {
     }
     handleNext = e => {
         e.preventDefault();
+        //return <Redirect to={this.state.nextImage} />;
         window.location = this.state.nextImage;
     }
     handleModalException = e => {
@@ -71,13 +75,27 @@ export default class cover extends Component {
             options: 0
         });
     }
+    handleAviso = () => {
+        this.setState({
+            isPrivacy: true
+        });
+    }
+    handleCloseAviso = e => {
+        this.setState({
+            isPrivacy: false
+        });
+    }
     //Render
     render() {
         //JSX Code
-        const { isModal, options, message, title, image } = this.state;
+        const { isPrivacy, isModal, options, message, title, image } = this.state;
         if(isModal){
             return(
                 <ModalM show={isModal} onHide={this.handleModalClose} options={options} title={title} message={message} handleNext={this.handleNext} image={image} />
+            )
+        }else if(isPrivacy){
+            return(
+                <AvisoPriv handleClose={this.handleCloseAviso}/>
             )
         }else{
             return (
@@ -140,6 +158,11 @@ export default class cover extends Component {
                 <br />
                 <section id="sec5">
                     <Footer />
+                </section>
+                <section id="6">
+                    <span className="footer" style={{cursor:'pointer'}} onClick={this.handleAviso}>
+                        Consulte nuestro&nbsp;<strong>aviso de privacidad</strong>
+                    </span>
                 </section>
                 </div>
             )

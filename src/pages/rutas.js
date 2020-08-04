@@ -63,7 +63,7 @@ export default class cover extends Component {
         this.setState({
             isModal: true,
             title: e.target.name,
-            message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+            message: 'Una ruta relativamente pequeña, pero con diversas opciones turísticas, históricas, paseos nocturnos, variedad gastronómica y diversas actividades recreativas. Esta ruta fue seleccionada como ruta prototipo por ser corta y de esta forma el trabajo con los negocios puede ser más dinámico.',
             options: 1,
             image: _src
         });

@@ -177,12 +177,14 @@ export default class nuevosnegocios extends Component {
     }
     handleAviso = () => {
         this.setState({
-            isPrivacy: true
+            isPrivacy: true,
+            options: 0
         });
     }
     handleCloseAviso = e => {
         this.setState({
-            isPrivacy: false
+            isPrivacy: false,
+            options: 0
         });
     }
     //Render

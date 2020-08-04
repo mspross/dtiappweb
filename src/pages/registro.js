@@ -182,12 +182,14 @@ export default class login extends Component {
     handleNotification = (_message, _options) => (<Notificacion message={_message} options={_options}/>);
     handleAviso = () => {
         this.setState({
-            isPrivacy: true
+            isPrivacy: true,
+            options: 0
         });
     }
     handleCloseAviso = e => {
         this.setState({
-            isPrivacy: false
+            isPrivacy: false,
+            options: 0
         });
     }
     //Render

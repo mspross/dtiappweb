@@ -167,30 +167,30 @@ export default class cover extends Component {
                     <Container fluid>
                         <Row>
                             <Col md={{ span: 6, offset: 3 }}>
-                                <CardGroup>
+                                <CardGroup style={{gridGap:'2rem'}}>
                                     <Card>
-                                        <Card.Img variant="top" src={`${Dti}`} style={{height:'260px', width:'225px', cursor:'pointer'}} onClick={this.handleDti} />
+                                        <Card.Img variant="top" src={`${Dti}`} className="card-home-items" onClick={this.handleDti} />
                                     </Card>
                                     <Card>
-                                        <Card.Img variant="top" src={`${Rutas}`} style={{height:'250px', width:'225px', cursor:'pointer'}} onClick={this.handleRoutes} />
+                                        <Card.Img variant="top" src={`${Rutas}`} className="card-home-items" onClick={this.handleRoutes} />
                                     </Card>
                                     <Card>
-                                        <Card.Img variant="top" src={`${Registro}`} style={{height:'250px', width:'225px', cursor:'pointer'}} onClick={this.handleRegistro} />
+                                        <Card.Img variant="top" src={`${Registro}`} className="card-home-items" onClick={this.handleRegistro} />
                                     </Card>
                                 </CardGroup>
                             </Col>
                         </Row>
                         <Row>
                             <Col md={{ span: 6, offset: 3 }}>
-                                <CardGroup>
+                                <CardGroup style={{gridGap:'2rem'}}>
                                     <Card>
-                                        <Card.Img variant="top" src={`${Noticias}`} style={{height:'260px', width:'225px', cursor:'pointer'}} onClick={this.handleModalException} />
+                                        <Card.Img variant="top" src={`${Noticias}`} className="card-home-items" onClick={this.handleModalException} />
                                     </Card>
                                     <Card>
-                                        <Card.Img variant="top" src={`${Exploracion}`} style={{height:'260px', width:'225px', cursor:'pointer'}} onClick={this.handleModalException} />
+                                        <Card.Img variant="top" src={`${Exploracion}`} className="card-home-items" onClick={this.handleModalException} />
                                     </Card>
                                     <Card>
-                                        <Card.Img variant="top" src={`${Contacto}`} style={{height:'260px', width:'225px', cursor:'pointer'}} onClick={this.handleContacto} />
+                                        <Card.Img variant="top" src={`${Contacto}`} className="card-home-items" onClick={this.handleContacto} />
                                     </Card>
                                 </CardGroup>
                             </Col>

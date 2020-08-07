@@ -7,6 +7,7 @@ export default class NegociosItem extends Component {
         this.state = {
             obj: this.props.obj,
             id: this.props.id,
+            images: this.props.obj.image,
             nextImage: '/dti/detalles'
         }
     }
@@ -16,13 +17,13 @@ export default class NegociosItem extends Component {
         window.location = this.state.nextImage;
     }
     render(){
-        const { obj, id } = this.state;
+        const { obj, id, images } = this.state;
         let _timer = obj.typeOfBusiness === "Hospedaje" ? (<li><strong>Entrada-Salida:</strong>&nbsp;{obj.checkinout}</li>) : (<li><strong>Servicio:</strong>&nbsp;{obj.openclose}</li>);
         return(
             <div className="cardd">
                 <div className="cardd-inner">
                     <div className="cardd-front">
-                        <img src={obj.image} alt=""/>
+                        <img src={images} alt=""/>
                     </div>
                     <div className="cardd-back">
                         <h1>

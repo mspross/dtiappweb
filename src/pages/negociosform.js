@@ -12,6 +12,7 @@ import './css/style.css';
 import './css/aviso.css';
 //Imagees
 import Registro from '../images/Bot_ini_azul.png';
+require('dotenv').config();
 //Class
 export default class nuevosnegocios extends Component {
     //Constructor
@@ -90,6 +91,7 @@ export default class nuevosnegocios extends Component {
             isopenclose: (value !== "Hospedaje" ? true : false),
             options: 0
         })
+        console.log(process.env.REACT_APP_FLAG_ENV);
     }
     handleCloseSession = async e => {
         e.preventDefault();
@@ -106,6 +108,20 @@ export default class nuevosnegocios extends Component {
     }
     handleNotification = (_message, _options) => (<Notificacion message={_message} options={_options}/>);
     handleClearForm = () => { window.location = this.state.linkrefresh };
+    handleUrlImage = (_data) => {
+        let _url = null;
+        switch (parseInt(process.env.REACT_APP_FLAG_ENV)){
+            case 0:
+                _url = process.env.REACT_APP_DEV.split('/');
+                return _url[0].concat('//').concat(_url[2]).concat('/uploads/').concat(_data);
+            case 1:
+                _url = process.env.REACT_APP_QA.split('/');
+                return _url[0].concat('//').concat(_url[2]).concat('/uploads/').concat(_data);
+            default:
+                _url = process.env.REACT_APP_PRD.split('/');
+                return _url[0].concat('//').concat(_url[2]).concat('/uploads/').concat(_data);
+        }
+    }
     handleSubmit = async e => {
         e.preventDefault();
         this.setState({
@@ -146,8 +162,8 @@ export default class nuevosnegocios extends Component {
                     type: this.state.typeOfBusiness,
                     sign: sessionStorage.getItem('AuthID').concat(sessionStorage.getItem('Nombre')).concat(sessionStorage.getItem('ID')),
                     manager: sessionStorage.getItem('Nombre'),
-                    imageold: _imgUp.data.data,
-                    imagenew: _imgUp.data.data,
+                    imageold: this.handleUrlImage(_imgUp.data.data),
+                    imagenew: this.handleUrlImage(_imgUp.data.data),
                     openclose: this.state.openclose || 'empty',
                     checkinout: this.state.checkinout || 'empty',
                     item1: this.state.item1 || 'empty',

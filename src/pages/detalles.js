@@ -1,6 +1,6 @@
 //Headers Components
 import React, { Component } from 'react';
-import { Container, Row, Col, Card, CardGroup, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card, CardGroup, Button, Image } from 'react-bootstrap';
 import Footer from '../components/footer';
 import Preorden from './preorden';
 import AvisoPriv from '../components/avisopriv';
@@ -86,47 +86,47 @@ export default class detalles extends Component {
                     <Container fluid>
                         <Row>
                             <Col md={{ span: 6, offset: 3 }}>
-                                <img alt="cover" className="imgcover" src={`${Cover}`} onClick={this.handleReturn}/>
+                                <Image alt="cover" className="imgcover" src={`${Cover}`} onClick={this.handleReturn}/>
                             </Col>
                         </Row>
                     </Container>
                 </section>
                  <section id="sec2">
                     <Container fluid>
-                        <Row>
+                        <Row style={{paddingTop:'5px'}}>
                             <Col md={{ span: 6, offset: 3 }}>
-                                <CardGroup>
+                                <CardGroup style={{gridGap:'.6rem'}}>
                                     <Card id="route1" className="text-center">
-                                        <Card.Img variant="top" src={`${Negocio1}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="Hospedaje" onClick={this.handleDestinos} />
+                                        <Card.Img variant="top" src={`${Negocio1}`} className="card-home-items" id="Hospedaje" onClick={this.handleDestinos} />
                                     </Card>
                                     <Card className="text-center">
-                                        <Card.Img variant="top" src={`${Negocio2}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="Ferias-Eventos" onClick={this.handleDestinos} />
+                                        <Card.Img variant="top" src={`${Negocio2}`} className="card-home-items" id="Ferias-Eventos" onClick={this.handleDestinos} />
                                     </Card>
                                     <Card className="text-center">
-                                        <Card.Img variant="top" src={`${Negocio3}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="Gastronomia" onClick={this.handleDestinos} />
+                                        <Card.Img variant="top" src={`${Negocio3}`} className="card-home-items" id="Gastronomia" onClick={this.handleDestinos} />
                                     </Card>
                                 </CardGroup>
                             </Col>
                         </Row>
-                        <Row>
+                        <Row style={{paddingTop:'10px'}}>
                             <Col md={{ span: 6, offset: 3 }}>
-                                <CardGroup>
+                                <CardGroup style={{gridGap:'.6rem'}}>
                                 <Card id="route1" className="text-center">
-                                        <Card.Img variant="top" src={`${Negocio4}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="Cultura-Recreacion" onClick={this.handleDestinos} />
+                                        <Card.Img variant="top" src={`${Negocio4}`} className="card-home-items" id="Cultura-Recreacion" onClick={this.handleDestinos} />
                                     </Card>
                                     <Card className="text-center">
-                                        <Card.Img variant="top" src={`${Negocio5}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="Artesanias" onClick={this.handleDestinos} />
+                                        <Card.Img variant="top" src={`${Negocio5}`} className="card-home-items" id="Artesanias" onClick={this.handleDestinos} />
                                     </Card>
                                     <Card className="text-center">
-                                        <Card.Img variant="top" src={`${Negocio6}`} style={{height:'100%', width:'100%', cursor:'pointer'}} id="Recomendados" onClick={this.handleDestinos} />
+                                        <Card.Img variant="top" src={`${Negocio6}`} className="card-home-items" id="Recomendados" onClick={this.handleDestinos} />
                                     </Card>
                                 </CardGroup>
                             </Col>
                         </Row>
-                        <Row>
-                        <Col md={{ span: 6, offset: 3 }}>
-                            <Button variant="outline-primary" className="button sombra btnText" size="sm" onClick={this.handlePreview}>Revisar Destino Tur&iacute;stico...</Button>
-                        </Col>
+                        <Row style={{paddingTop:'10px'}}>
+                            <Col md={{ span: 6, offset: 3 }}>
+                                <Button variant="outline-primary" className="button sombra btnText" size="sm" onClick={this.handlePreview}>Revisar Destino Tur&iacute;stico...</Button>
+                            </Col>
                         </Row>
                     </Container>
                 </section>

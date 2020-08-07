@@ -1,8 +1,9 @@
 node_modules/
 build/
 *.log
-.DS_Store
 *.test
 *.chk
 *.tar.gz
 *.gz
+.DS_Store
+.env
